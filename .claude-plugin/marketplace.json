@@ -1,0 +1,15 @@
+{
+  "name": "standup-gen",
+  "description": "Standup update generator for Claude Code sessions.",
+  "owner": {
+    "name": "Shubham Singh",
+    "url": "https://github.com/1Shubham7"
+  },
+  "plugins": [
+    {
+      "name": "standup-gen",
+      "source": "./",
+      "description": "Generates a standup update as plain bullet points, in your own casual voice, from the real work done in the current Claude Code session."
+    }
+  ]
+}

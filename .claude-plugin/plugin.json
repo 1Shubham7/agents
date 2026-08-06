@@ -1,0 +1,13 @@
+{
+  "name": "standup-gen",
+  "description": "Generates a standup update as plain bullet points, in your own casual voice, from the real work done in the current Claude Code session — including dead ends and detours, not just what shipped.",
+  "version": "1.0.0",
+  "author": {
+    "name": "Shubham Singh",
+    "url": "https://github.com/1Shubham7"
+  },
+  "homepage": "https://github.com/1Shubham7/standup-gen",
+  "repository": "https://github.com/1Shubham7/standup-gen",
+  "license": "MIT",
+  "keywords": ["standup", "productivity", "agent", "reporting"]
+}
