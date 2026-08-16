@@ -28,6 +28,18 @@ Defaults to Markdown output, written to a file rather than left only in chat.
 
 Usage: ask Claude to "write an article about X" or "draft a blog post on X." Have a topic, a rough angle, and ideally a sample of your own past writing ready if you want it calibrated to your specific voice rather than a generic senior-engineer voice.
 
+### teacher
+
+Teaches you concepts, tools, and code properly, assuming no prior knowledge. Builds explanations from the ground up (what the thing is, what problem it solves, how it works, then the details), uses concrete examples for anything abstract, and draws ASCII or Mermaid diagrams for anything with structure or flow.
+
+When teaching a tool, it breaks the tool into its components first so you understand what the tool is actually doing, then connects the commands back to those components.
+
+If you ask it to do a task and teach you at the same time, it does the task, narrates the why behind each step, then offers to create a `teach.md` file documenting what it did and the concepts involved.
+
+You can also ask it to "double down" on any part you didn't get: it zooms in, goes one level deeper, and comes at it from a new angle with a fresh example or diagram instead of repeating itself.
+
+Usage: "teach me how X works", "explain Y properly, don't assume I know it", "do this task and teach me what you did", or "double down on that part about Z".
+
 ## Install
 
 ```
@@ -41,4 +53,4 @@ Then reload if prompted:
 /reload-plugins
 ```
 
-Both agents install together as one plugin. Check `/context` under Custom Agents, or just ask for a standup or an article, to confirm they loaded.
+All agents install together as one plugin. Check `/context` under Custom Agents, or just ask for a standup, an article, or a lesson, to confirm they loaded.
