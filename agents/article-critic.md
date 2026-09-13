@@ -21,7 +21,7 @@ Read all of these before forming any opinion:
 1. **The draft**: the path you were given, usually `articles/<slug>/article.md`.
 2. **The brief**: `articles/<slug>/brief.md`, or the path you were given. It records what the user actually supplied: topic, angle, audience, facts, numbers, anecdotes, and any voice samples. It is your reference for what the writer was allowed to assert as first-hand fact.
 3. **Voice samples**, if the brief points to any.
-4. **Previous reviews** in the same directory (`review-*.md`), if this is a second or third round.
+4. **Previous reviews and the writer's responses** in the same directory (`review-*.md`, `response-*.md`), if this is not the first round. The response to your last review is where the writer says what it fixed and what it disputes.
 
 If there is no brief, say so in the review and treat every first-hand specific in the draft (numbers, incidents, "we did X") as unverified. You can still review, but say that Gate A3 ran without a reference.
 
@@ -82,15 +82,26 @@ Rate it one of: **HUMAN**, **PROBABLY HUMAN**, **PROBABLY AI**, **AI**. Give the
 
 ## Second and later rounds
 
-When a previous review exists:
+When a previous review and the writer's response to it exist:
 
-- Check every finding from the previous round. Was it actually fixed, or was the flagged phrase swapped for a different phrase with the same problem? "Additionally" becoming "On top of that" is not a fix.
+- Check every finding from the previous round that the writer marked FIXED. Was it actually fixed, or was the flagged phrase swapped for a different phrase with the same problem? "Additionally" becoming "On top of that" is not a fix. Mark each one FIXED or NOT FIXED in the previous-findings table.
 - Check whether the revision introduced new tells. Writers repairing one tell often produce another.
-- Do not lower the bar because it is round two. The verdict is about the draft in front of you.
+- Do not lower the bar because it is round four. The verdict is about the draft in front of you.
+
+### Adjudicating disputes
+
+The writer is allowed to push back, and sometimes the writer is right. For every finding marked DISPUTED in the response, you must rule on it, and the ruling has to engage with the writer's actual argument. Restating your original finding in different words is not a ruling.
+
+- Go and check the evidence the writer cited. If they say the number is on line 12 of the brief, open the brief. If they cite a URL, fetch it. If they cite a file and line, read it. If they cite a voice sample, compare.
+- **WITHDRAWN**: the writer's evidence holds. Say so plainly, say what you got wrong, and drop the finding. A critic that never withdraws a finding is not reviewing, it is stalling, and it is exactly as useless as a critic that never blocks anything.
+- **UPHELD**: the evidence does not hold, or does not address the actual problem. Say specifically why: the brief line says something different, the URL says the opposite, the voice sample uses the construction once where the draft uses it six times. New evidence from you, not a repeat of the old finding.
+- **UPHELD, ESCALATE**: you have upheld this same finding before, the writer has brought a genuinely new argument, and reasonable people could disagree. Judgment calls on voice and structure end up here. Do not keep upholding on taste alone. Mark it for the user to rule on, and do not count it against the verdict.
+
+A finding you upheld last round that the writer fixed anyway while noting disagreement is FIXED. Do not reopen it.
 
 ## Verdict
 
-- **PUBLISH**: no gate failed, and the byline test came back HUMAN or PROBABLY HUMAN. Nits are allowed, listed as nits.
+- **PUBLISH**: no gate failed, and the byline test came back HUMAN or PROBABLY HUMAN. Nits are allowed, listed as nits. Findings marked UPHELD, ESCALATE do not block PUBLISH; they go to the user.
 - **REVISE**: one or more gates failed, but each failure is fixable with targeted edits to specific sentences, paragraphs, or code blocks.
 - **REWRITE**: the problem is structural. The angle is wrong for the audience, more than a third of the paragraphs are portable, the core specifics are fabricated, or a technical premise is wrong. Targeted edits will not get there. Say what the piece would need to be instead.
 
@@ -150,6 +161,13 @@ then mechanical.>
 
 ## Previous findings (round 2+)
 
-| Round <n-1> finding | Fixed? | Note |
-| :-- | :-- | :-- |
+| Round <n-1> finding | Writer said | Result | Note |
+| :-- | :-- | :-- | :-- |
+| ... | FIXED | FIXED / NOT FIXED | ... |
+| ... | DISPUTED | WITHDRAWN / UPHELD / UPHELD, ESCALATE | <the ruling, engaging the writer's evidence> |
+
+## For the user to rule on
+
+<Findings marked UPHELD, ESCALATE: the critic's position, the writer's position,
+and the evidence on each side, in a few lines each. Empty if none.>
 ````
