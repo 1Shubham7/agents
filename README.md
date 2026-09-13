@@ -18,15 +18,24 @@ Notes:
 - Only covers the current session's transcript. It can't see across separate sessions.
 - The first time you ask in a session, it covers everything so far. Ask again later in the same session and it only covers what's new since the last time.
 
-### tech-writer
+### write-article (tech-writer + article-critic)
 
-Writes technical articles and blog posts that read as genuinely human-written, not AI-generated, in your own voice where you provide samples.
+Writing a technical article is two jobs, so this is two agents and a skill that runs them in order.
 
-Before drafting, it reads a handful of old (pre-2022) posts from Cloudflare's blog, the Netflix Tech Blog, and Stripe's engineering blog, specifically to study structure and rhythm from writing that predates LLM-assisted drafting. It then writes while actively avoiding the usual AI tells: em dashes used as punctuation, stock transition phrases ("moreover," "it's important to note"), the rule-of-three adjective crutch, LLM-flavored vocabulary ("leverage," "delve," "seamless"), generic headers, and canned intros or outros. It self-reviews its own draft against that checklist before showing it to you.
+**tech-writer** drafts. Before writing, it reads a handful of old (pre-2022) posts from Cloudflare's blog, the Netflix Tech Blog, and Stripe's engineering blog to study structure and rhythm from writing that predates LLM-assisted drafting. It writes in your voice if you give it samples, avoids the usual AI tells (em dashes as punctuation, stock transitions, the rule-of-three crutch, "leverage" and "delve" and friends, generic headers, canned intros and outros), and refuses to invent specifics: any number, incident, or decision you didn't supply becomes a visible `[NEED: ...]` placeholder instead of a plausible fabrication.
 
-Defaults to Markdown output, written to a file rather than left only in chat.
+**article-critic** reviews the draft cold, without seeing anything the writer said about it. It judges two things:
 
-Usage: ask Claude to "write an article about X" or "draft a blog post on X." Have a topic, a rough angle, and ideally a sample of your own past writing ready if you want it calibrated to your specific voice rather than a generic senior-engineer voice.
+- Is it correct? Every technical claim gets checked against a primary source (docs, source code, an RFC, or the repo itself if the article is about your code). Every code block gets checked for real APIs and flags. Every first-hand specific gets traced back to the brief you gave; anything that traces to nothing is flagged as fabricated.
+- Does it read like a professional wrote it, or like AI slop? A mechanical grep for the tells above, then structural checks: are the sections suspiciously even, does every list have three items, could this paragraph be pasted into any other article on the topic (the substitution test), does the author ever actually take a position, do sentence lengths vary, is it explaining mutexes to backend engineers. It finishes with a byline test: would an experienced reader guess HUMAN or AI within two paragraphs, and which three quotes drove that call.
+
+The verdict is PUBLISH, REVISE, or REWRITE, with every finding quoting the offending text and saying what the fix looks like. The critic doesn't rewrite the article; that would replace your voice with its own.
+
+**write-article** is the skill that orchestrates. It collects the assignment into `articles/<slug>/brief.md` (topic, angle, audience, voice samples, and the facts you're supplying, recorded verbatim), runs the writer, runs the critic, and if the verdict isn't PUBLISH sends the review back to the writer for a revision pass and reviews again. Hard cap of three review rounds; if it still isn't there, you get told that rather than a softened verdict. All handoffs go through files, so the critic never reviews a summary.
+
+Usage: `/write-article <topic>` or just "write an article about X". Have a topic, a rough angle, any real numbers or incidents you want in it, and ideally a sample of your own writing. Output lands in `articles/<slug>/`: `brief.md`, `article.md`, and one `review-N.md` per round.
+
+You can still call `tech-writer` alone for a draft with no review, or point `article-critic` at any existing draft to get it judged.
 
 ### teacher
 
@@ -54,3 +63,5 @@ Then reload if prompted:
 ```
 
 All agents install together as one plugin. Check `/context` under Custom Agents, or just ask for a standup, an article, or a lesson, to confirm they loaded.
+
+To register the article pipeline locally without going through the plugin, copy `agents/*.md` into `~/.claude/agents/` and symlink `skills/write-article` into `~/.claude/skills/`.

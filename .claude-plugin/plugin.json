@@ -1,7 +1,7 @@
 {
   "name": "agents",
-  "description": "Shubham's personal Claude Code agents: standup-gen (plain-spoken standup summaries from your session), tech-writer (technical articles that read as human-written, calibrated against real engineering blogs), and teacher (teaches concepts and tools from the ground up with examples and diagrams).",
-  "version": "1.2.0",
+  "description": "Shubham's personal Claude Code agents: standup-gen (plain-spoken standup summaries from your session), tech-writer + article-critic (a write/review pipeline for technical articles that read as human-written, run via the write-article skill), and teacher (teaches concepts and tools from the ground up with examples and diagrams).",
+  "version": "1.3.0",
   "author": {
     "name": "Shubham Singh",
     "url": "https://github.com/1Shubham7"
@@ -9,5 +9,12 @@
   "homepage": "https://github.com/1Shubham7/agents",
   "repository": "https://github.com/1Shubham7/agents",
   "license": "MIT",
-  "keywords": ["standup", "writing", "productivity", "teaching", "agent"]
+  "keywords": [
+    "standup",
+    "writing",
+    "editing",
+    "productivity",
+    "teaching",
+    "agent"
+  ]
 }

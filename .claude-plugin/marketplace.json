@@ -9,7 +9,7 @@
     {
       "name": "agents",
       "source": "./",
-      "description": "standup-gen (session standup summaries) + tech-writer (human-voiced technical articles)."
+      "description": "standup-gen (session standup summaries) + write-article pipeline (tech-writer drafts, article-critic reviews) + teacher (ground-up explanations)."
     }
   ]
 }
