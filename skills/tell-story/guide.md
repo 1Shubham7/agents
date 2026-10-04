@@ -119,6 +119,54 @@ Anderson's list of how talks die is a list of how posts die: running out of time
 
 Stop on the strongest thing. Readers remember the last line longest.
 
+## Part 4: Making it stick, making it travel
+
+A story can be well built and still be forgotten by the next scroll. Two books are about exactly that problem. *Made to Stick* asks why some ideas are remembered. *Contagious* asks why some get passed on. Use them as two editing passes over a finished draft.
+
+### The stick pass
+
+The Heaths' six principles spell SUCCESs. Read the draft once for each.
+
+| Principle | The question to ask of the draft |
+| :-- | :-- |
+| **Simple** | Is there one core, and is it compact? "Simple" means prioritised, the way a proverb is. If the draft has two points, one of them is a different post. |
+| **Unexpected** | Where does the pattern break, and does the draft open a gap before it closes it? Surprise gets attention. Curiosity holds it. |
+| **Concrete** | Could a reader draw it? The Heaths compare memory to Velcro: the more hooks an idea has, the better it holds, and sensory detail is hooks. Swap every abstraction for the thing itself. |
+| **Credible** | Does the story prove itself from the inside? Vivid, checkable details do this better than any appeal to authority. So does one example strong enough to settle the matter alone, which the Heaths call the Sinatra test. |
+| **Emotional** | Is it about one person? People feel for an individual and go numb at a crowd. One named engineer at 3 a.m. outweighs "millions of users affected". |
+| **Stories** | Does it let the reader simulate being there, and want to act? This is the principle the other five serve. |
+
+Two tools from the same book deserve their own notes.
+
+**Human-scale numbers.** A statistic means nothing until the reader can feel its size. Translate it into a unit a person lives in. A trading firm that lost about $440 million in 45 minutes was losing close to ten million dollars a minute. A timeout of three milliseconds is 558 miles of light. Do the arithmetic yourself, check it, and give the reader the version they can hold.
+
+**The curse of knowledge.** In the Heaths' best-known example, people asked to tap out a famous song on a table predicted that listeners would name it half the time. Listeners managed about one song in forty. The tapper hears the tune in their head and cannot imagine not hearing it. After researching a story you are the tapper: you know the postmortem, the acronyms, who everyone is. The reader has only the page.
+
+For this audience the curse cuts both ways. The reader is an engineer, so explaining what DNS is insults them and reads like filler. But they were not in the room, so they do not know that "the Power Peg flag" was dead code, or who Jia Tan was. Assume the craft. Supply the incident.
+
+### The travel pass
+
+Berger's six principles spell STEPPS. Not every story needs all of them, and two or three done well is plenty.
+
+- **Social currency.** People share what makes them look sharp. A story that gives the reader a piece of inside knowledge ("that's why the default is 1500") is a gift they can re-gift.
+- **Triggers.** Berger's phrase is "top of mind, tip of tongue". Things get talked about when something in the environment keeps reminding people of them. A story hooked to something engineers touch daily, a command, an error message, a default port, gets recalled every time they touch it. Favour stories with a trigger built in, and make sure the trigger is named in the telling.
+- **Emotion.** High arousal, as covered in Part 2.
+- **Public.** Mostly a matter for the image, which is the part of the post visible at a glance.
+- **Practical value.** News a reader can use. If the story leaves them with a check they will run on their own system tomorrow, they will send it to their team.
+- **Stories.** The Trojan horse from Part 2. The idea rides inside the narrative, and the narrative cannot be told without it.
+
+### Persuasion, used honestly
+
+Robert Cialdini's *Influence* catalogues the shortcuts people use to decide: reciprocity, commitment and consistency, social proof, liking, authority, scarcity, and in later editions unity. He wrote it largely so that readers could defend themselves, and the feed is full of the tactics he warns about: invented urgency, borrowed authority, "everyone is talking about this". A true story has no need of them. It can earn the same principles legitimately.
+
+- *Reciprocity*: give the reader something complete and ask for nothing. That is the whole reason the post ends without a request.
+- *Authority*: comes from precision. A date, a version number, and a verbatim quote make a writer credible in a way that claiming expertise never does.
+- *Liking and unity*: we listen to people who are like us. Write as one engineer to another, in the vocabulary of the trade, with no explaining down.
+- *Scarcity*: a story few people know is worth more than one everybody has heard. That is a reason to dig for the uncommon story, and never a reason to dress up a common one as a secret.
+- *Social proof and commitment*: leave these alone. In a post they only show up as bait.
+
+Cialdini also reports Ellen Langer's photocopier experiment: people let a stranger cut in line far more often when the request came with a reason, even an empty one, because the word "because" itself triggers agreement. Stories run on the honest form of that reflex. A reader who is given the cause of each event keeps nodding. This is Cron's cause and effect again, arrived at from the other side.
+
 ## Part 6: The X post
 
 One post. 280 characters, which is about 45 words. `check_story.py` does the counting, because you cannot.
