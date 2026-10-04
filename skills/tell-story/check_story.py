@@ -15,12 +15,12 @@ import unicodedata
 
 X_LIMIT = 280
 LINKEDIN_LIMIT = 3000
-LINKEDIN_LONG = 2200  # past this a story post is usually padded
+LINKEDIN_MAX_WORDS = 300  # the guide's ceiling for a story post
 LINKEDIN_FOLD = 140  # roughly what shows before "see more" on a phone
 LINKEDIN_MAX_HASHTAGS = 3
-IMAGE_MIN_WORDS = 40
+IMAGE_WORDS = (60, 120)
 
-REQUIRED_FRONTMATTER = ("title", "date", "subject", "area")
+REQUIRED_FRONTMATTER = ("title", "date", "subject", "area", "scope", "opening", "image")
 SECTIONS = ("X", "LinkedIn", "Image prompt", "Sources")
 
 # X counts these code point ranges as 1 character and everything else as 2
@@ -163,11 +163,14 @@ def check(path):
     linkedin = sections.get("LinkedIn", "")
     if linkedin:
         length = len(linkedin)
-        info.append(f"LinkedIn: {length}/{LINKEDIN_LIMIT} characters, {len(linkedin.split())} words")
+        words = len(linkedin.split())
+        info.append(f"LinkedIn: {length}/{LINKEDIN_LIMIT} characters, {words} words")
         if length > LINKEDIN_LIMIT:
             errors.append(f"LinkedIn: {length} characters, {length - LINKEDIN_LIMIT} over the limit")
-        elif length > LINKEDIN_LONG:
-            warnings.append(f"LinkedIn: {length} characters. Check for padding.")
+        elif words > LINKEDIN_MAX_WORDS:
+            warnings.append(
+                f"LinkedIn: {words} words, the ceiling is {LINKEDIN_MAX_WORDS}. Cut, do not compress."
+            )
         hook = linkedin.splitlines()[0]
         if len(hook) > LINKEDIN_FOLD:
             warnings.append(
@@ -189,8 +192,11 @@ def check(path):
     if image:
         words = len(image.split())
         info.append(f"Image prompt: {words} words")
-        if words < IMAGE_MIN_WORDS:
+        low, high = IMAGE_WORDS
+        if words < low:
             warnings.append(f"Image prompt: only {words} words, too thin to steer an image model")
+        elif words > high:
+            warnings.append(f"Image prompt: {words} words, the range is {low} to {high}")
         for dash in DASHES[:2]:
             if dash in image:
                 errors.append("Image prompt: em or en dash used as punctuation")
@@ -214,7 +220,7 @@ def main():
     for line in errors:
         print(f"ERROR {line}")
     if not errors and not warnings:
-        print("OK    clean")
+        print("OK    mechanical checks pass. This script cannot check facts: do the last read.")
     return 1 if errors else 0
 
 
