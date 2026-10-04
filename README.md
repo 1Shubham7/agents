@@ -37,6 +37,20 @@ Usage: `/write-article <topic>` or just "write an article about X". Have a topic
 
 You can still call `tech-writer` alone for a draft with no review, or point `article-critic` at any existing draft to get it judged.
 
+### story-teller (and the tell-story skill)
+
+Finds a true story from tech and writes it up for posting: one file in `stories/` with an X post inside the 280-character limit, a LinkedIn post, and a prompt you can hand to an image model for the picture that goes with both.
+
+The stories come from anywhere in tech: languages, tools, hardware, security, the people behind them. In DevOps and programming it is allowed to go niche, down to a flag, a default, or a line in a postmortem. Each run reads what is already in `stories/` and picks something new, with a different opening and a different image style from the recent ones.
+
+Two rules shape everything it writes. The story has to be true: it fetches at least two sources per run, every name, date, number, and quote has to appear in one of them, and the file ends with a `Sources` section so you can check before you post. It never writes in the first person about things you did not do. And it has to read like a writer wrote it, which is what `skills/tell-story/guide.md` is for. The guide distills twelve books on storytelling and why ideas spread (*Made to Stick*, *Contagious*, *Wired for Story*, *Putting Stories to Work*, *The Storytelling Animal*, Campbell's monomyth, *TED Talks*, *Influence*, *Start With Why*, *Ego Is the Enemy*, and others) into working instructions: what counts as a story, how to choose one, how to build it, how to make it stick and travel, what human prose is made of, and how to write each of the three outputs. The agent reads it in full on every run.
+
+`skills/tell-story/check_story.py` does what a model cannot do reliably. It counts the X post with X's own character weighting, checks the LinkedIn post against the 3,000 limit and the mobile fold, and scans for em-dashes, stock vocabulary, the "it wasn't X, it was Y" reversal, one-sentence-per-line cadence, and flat sentence rhythm. The agent runs it and fixes what it flags before reporting back.
+
+`stories/` is in `.gitignore`. In any other repository the agent adds it to `.git/info/exclude`, so drafts never get pushed.
+
+Usage: `/tell-story` for a story of its choosing, `/tell-story the history of grep` or `/tell-story something about Kubernetes networking` to steer it, or just "tell me a tech story".
+
 ### teacher
 
 Teaches you concepts, tools, and code properly, assuming no prior knowledge. Builds explanations from the ground up (what the thing is, what problem it solves, how it works, then the details), uses concrete examples for anything abstract, and draws ASCII or Mermaid diagrams for anything with structure or flow.
@@ -62,6 +76,6 @@ Then reload if prompted:
 /reload-plugins
 ```
 
-All agents install together as one plugin. Check `/context` under Custom Agents, or just ask for a standup, an article, or a lesson, to confirm they loaded.
+All agents install together as one plugin. Check `/context` under Custom Agents, or just ask for a standup, an article, a story, or a lesson, to confirm they loaded.
 
-To register the article pipeline locally without going through the plugin, copy `agents/*.md` into `~/.claude/agents/` and symlink `skills/write-article` into `~/.claude/skills/`.
+To register the agents and skills locally without going through the plugin, copy `agents/*.md` into `~/.claude/agents/` and symlink `skills/write-article` and `skills/tell-story` into `~/.claude/skills/`.
