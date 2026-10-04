@@ -57,6 +57,68 @@ That sentence does not appear in the post. It is a ruler. Every detail that does
 
 **Is the idea load-bearing?** Berger's last principle is the Trojan horse: people share stories, and whatever is packed inside goes along for the ride, but only if the story cannot be told without it. The technical idea in your story should sit at the hinge of the plot. Nobody can retell the 500-mile email without explaining the timeout. That is the standard.
 
+## Part 3: Building it
+
+### The spine
+
+Joseph Campbell laid out the pattern under the world's myths in *The Hero with a Thousand Faces*: a hero leaves the ordinary world, crosses into a place of trials, wins something, and comes home changed. He divided it into Departure, Initiation, and Return. A 200-word post cannot visit all seventeen of his stages and should not try. What survives compression is the three movements, and each maps onto a tech story without forcing.
+
+1. **Departure.** The ordinary world, briefly, and then the call: the page at 3 a.m., the licence revoked, the ticket that makes no sense. Campbell's "refusal of the call" is worth keeping when the record has it, because it is so human. Harris's first response to the 500-mile report was that email does not work that way.
+2. **Initiation.** The road of trials. What they tried, what failed, the point where it looked worst. This is the part writers skip and readers want. The struggle is the story.
+3. **Return.** They come back with what Campbell calls the boon: the fix, the tool, the piece of knowledge. And something is different afterwards. Say what.
+
+Treat this as a map of where stories tend to go. The Joseph Campbell Foundation itself says only the three phases are essential and the rest are variations, and that a tale containing every stage turns clumsy and bloated. Callahan goes further and tells business storytellers to throw the Hero's Journey away as far too complicated for the small stories people actually tell. Take his advice about the seventeen stages. The three movements are what is left.
+
+Callahan offers a simpler frame for stories that explain why something exists, which he calls a clarity story: *in the past* things were one way, *then something happened*, *so now* we do this, and *in the future* it leads here. The origin of nearly any tool fits it.
+
+### Cause, then effect
+
+Cron's rule for what holds a story together: every event is caused by the one before it and causes the one after. Test your draft by reading the joins between sentences. If they are all "and then", you have a timeline. If they are "so" and "but" and "because", you have a story.
+
+> A consultant patched the server. The patch swapped in an older Sendmail. The older Sendmail could not read the config, *so* the timeout became zero, *so* any connection that took longer than three milliseconds died.
+
+The joining words do not need to appear on the page. The logic does.
+
+### Start where the trouble starts
+
+Open at the call. The ordinary world gets a clause, at most a sentence, placed after the reader is already curious. Cron's question for every piece of background is: what does the reader need to know right now to understand what is happening? Anything else waits, or goes. John Walsh's *The Art of Storytelling* builds a story in fourteen steps, and two of them are "plan your first words" and "know how the story ends". Those are the two places a story is won or lost. Settle both before you fill in the middle.
+
+Callahan's advice on first words: begin with a time marker or a place marker ("In March 2016", "At 2:14 on a Tuesday morning", "In a lab at Harvard"), which signals to a listener that an account of something real is coming. And never announce the story. The phrase "let me tell you a story" puts the reader on guard and delays the thing it promises.
+
+Anderson lists four ways to open that hold an audience: drama, a spark of curiosity, a compelling image, or a tease of what is coming. On a feed, the first two do nearly all the work.
+
+### See it before you write it
+
+Walsh titles one chapter "You Have to See It". The teller pictures each scene and then describes what is there, and the audience experiences the story where it would otherwise only hear about it. It works on the page too. Before drafting, pick the three or four pictures the story is made of. For the 500-mile email: a phone call with a statistician; a terminal with test messages going out; a config file full of zeros; a number on the screen. Then write what is in each picture.
+
+Another of his steps is to tell the story from the view of someone at the scene. Choose where the camera stands. The same outage is a different story from the on-call engineer's chair, from the desk of the customer whose checkout stopped working, and from the seat of the person who merged the change. Pick one and stay there for as long as the record lets you. If the only recorded scene belongs to a different seat, move the camera once, at a paragraph break.
+
+Scenes are built from things a camera or a microphone could pick up. Cron's chapter title says it: the story is in the specifics. "He tested it" is a summary. "Mail to Princeton, 400 miles away, went through" is a scene. One sensory detail per scene is enough in a post this short, and it must be one a trusted source records. If the record offers none, the scene is built from actions and numbers alone, which is still a scene. Cron's caution applies here: sensory details clog a story's arteries unless they tell the reader something they need. The detail has to do work.
+
+Give at least one person a line in their own words, spoken or written. Callahan counts dialogue among the things that make a listener feel they are inside an event, and a verbatim quote is also the strongest proof that the event happened.
+
+### The stakes, early
+
+The reader should know by the second paragraph what could be lost. Put a number or a name on it. "A trading firm had a bad deploy" has no stakes. "It was losing roughly ten million dollars a minute" does.
+
+### What to cut
+
+Two more of Walsh's steps come as a pair: eliminate needless detail, then add description. The order matters. Clear out what the story does not need, and spend the space you won on making the remaining scenes visible. Cron's version is to ask "and so?" of every sentence. In practice, cut:
+
+- Background the reader did not need in order to follow the turn.
+- The second example of anything.
+- Every name after the second or third. A post can hold one protagonist and one or two others.
+- Explanations of things your reader already knows. See the curse of knowledge in Part 4, which cuts both ways.
+- Identifiers the reader will never use: internal task names, ticket numbers, hostnames, the second version string. Keep one if it has flavour.
+- All but one paragraph of mechanism. Even a niche post holds a single technical idea, explained once, in the plainest words that are still correct. When the explanation runs longer than the events, you have written a postmortem with a person in the first line.
+- Your favourite fact, if it does not serve the one sentence.
+
+### Endings
+
+Anderson's list of how talks die is a list of how posts die: running out of time, apologising for what was left out, a vague platitude, a request for money. His better endings include two that work in a short piece. One is the camera pull-back, where the last lines show the wider meaning of what just happened. The other is narrative symmetry, where the ending returns to the image you opened with and it now means something else. The 500-mile post does the second: it opens with a bug report and closes on the same report, now accurate to within forty miles.
+
+Stop on the strongest thing. Readers remember the last line longest.
+
 ## Part 6: The X post
 
 One post. 280 characters, which is about 45 words. `check_story.py` does the counting, because you cannot.
