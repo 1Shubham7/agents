@@ -38,7 +38,7 @@ It writes `articles/<slug>/review-<n>.md` and returns a verdict: PUBLISH, REVISE
 
 ## Stage 3: loop until the critic is satisfied
 
-- **PUBLISH**: stop. Go to the report.
+- **PUBLISH**: stop looping. Go to Stage 4.
 - **REVISE** or **REWRITE**: invoke **tech-writer** in revision mode with the draft path, the review path, and the brief path. It fixes what it agrees with, disputes what it can defend with evidence, and writes `response-<n>.md`. Then run Stage 2 again as round `n+1`, giving the critic the draft, the brief, and the path to `response-<n>.md`. The critic adjudicates each dispute itself; you do not summarise, relay, or take sides.
 
 There is no fixed round limit. The loop ends when the critic returns PUBLISH. The writer and critic argue through the files, not through you, and your only job between rounds is to invoke the next agent with the right paths.
@@ -50,15 +50,25 @@ Two things do stop the loop early. Both are for the user to decide, not you:
 
 Never do these things to end the loop faster: edit the draft yourself, tell the critic the draft is fine, skip a round, or report REVISE as "basically done."
 
+## Stage 4: finalise and clean up
+
+`articles/<slug>/` is the pipeline's working folder, not where the finished piece lives. Once the critic has returned PUBLISH:
+
+1. **Put the article where it belongs.** Copy `articles/<slug>/article.md` to the output path from the brief, for example the site's blog or content folder. If the user named no output path, move it to `<slug>.md` in the working directory. If the user asked for commits, make them now, and only for the published file.
+2. **Take what the report needs.** Read the reviews and responses for everything the report below asks for, including anything in the final review the user still has to act on. Those files are about to go, so the report is the only record of them.
+3. **Remove the working folder.** Delete `articles/<slug>/`, and `articles/` itself if that leaves it empty. Nothing under `articles/` is ever committed.
+
+Clean up only after the article is safely at its destination. If the loop stopped before PUBLISH (a deadlock, a check-in, or the user stopping it), leave the folder alone: the next round needs the brief, the draft, and the review files.
+
 ## Report
 
 Show the user, in this order:
 
 1. **Verdict** from the final round, and the **byline test** result (HUMAN through AI).
-2. **Path** to the article, and to each review and response file.
+2. **Path** to the finished article. If the loop stopped before PUBLISH, the working folder is still there, so give the paths to the draft and to each review and response file as well.
 3. **Placeholders** the user has to fill in, the full list of `[NEED: ...]` markers.
 4. **Rounds**: one line per round, what the critic flagged, what the writer fixed, and what it disputed and how the critic ruled.
 5. **Escalated findings**, anything the critic marked for the user to rule on, with both positions.
-6. **Residual findings**, if the loop was stopped before PUBLISH. Lead with these in that case.
+6. **Residual findings**, anything the final review left open. If the loop was stopped before PUBLISH, lead with these.
 
-Keep your own commentary to a few lines. The article and the reviews are the deliverable; you are not adding a third opinion on top of them.
+Keep your own commentary to a few lines. The article is the deliverable, and after cleanup the report is the only record of the reviews; you are not adding a third opinion on top of them.
