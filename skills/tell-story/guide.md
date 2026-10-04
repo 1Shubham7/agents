@@ -167,6 +167,55 @@ Robert Cialdini's *Influence* catalogues the shortcuts people use to decide: rec
 
 Cialdini also reports Ellen Langer's photocopier experiment: people let a stranger cut in line far more often when the request came with a reason, even an empty one, because the word "because" itself triggers agreement. Stories run on the honest form of that reflex. A reader who is given the cause of each event keeps nodding. This is Cron's cause and effect again, arrived at from the other side.
 
+## Part 5: The prose
+
+Everything so far decides what goes in the story. This part is about the sentences, which is where a reader decides in a few seconds whether a person wrote this.
+
+### Three models from the shelf
+
+**Ryan Holiday** is the closest model for a short true story. A chapter of *Ego Is the Enemy* typically drops you into a historical life already under way, a general or an athlete or an inventor at a moment of decision, and tells it in short declarative sentences with plain words and no hedging. The point comes after the story, never before it. Take from him: start inside the event, prefer the short sentence, use the plain word, and let the long sentence be the exception that carries a chain of events. Leave one of his habits on the shelf. His chapters end by turning to "you" with a run of instructions, which suits a book the reader chose to pick up. In a feed it is a sermon.
+
+Take his subject too. The book's argument is that ego, the need to be seen as important, ruins the work. On the page, a writer's ego shows up as cleverness on display, hype, and the urge to tell the reader what to think. The story belongs to its subject. The narrator who performs insight ("and that's when it hit me") is making it about themselves. One chapter, "Talk, Talk, Talk", warns against talking about the work in place of doing it, and the writing equivalent is announcing that something is fascinating when you could be showing the fascinating thing.
+
+Anderson makes the same point from the stage. He names four kinds of talk nobody wants: the sales pitch, the ramble, the org bore (an organisation's inner workings are dull to everyone outside it), and the inspiration performance. "Inspiration can't be performed," he writes. It is a response the audience has to a real story, and a speaker who reaches for it directly gets the opposite. LinkedIn is where all four live. A true story told straight is the alternative to each of them.
+
+**Sejal Badani's** *The Storyteller's Secret* is a novel, and what it teaches is texture and withholding. The book plants its questions early (why did the narrator's mother leave India and never go back?) and makes the reader wait for the answers, telling a past story inside a present-day frame: a granddaughter in the present, listening as her grandmother's old servant recounts the grandmother's life in instalments. Three things carry over. First, the frame. A story from 1975 can open in the present ("Every time you type `grep`, you are using a name that began as an editor command") and then step back, which gives the reader a reason to care before the history starts. Second, withhold the answer and never the question. The reader of the novel knows from the start what the mystery is. Cron warns that hiding information to set up a big reveal usually robs a story of its hooks, because a reader who does not know what is at stake has nothing to wonder about. Tell them early what is strange. Make them wait for why.
+
+Third, the senses. Readers praise the book's food, fabric, and festival colour, and its sharper critics complain that the dishes go unnamed. That complaint is the lesson: a sensory detail works when it is the specific thing. A server room has its own versions: the fan noise, the cold aisle, the amber cursor, the pager on the nightstand. One such detail, if the record supports it, moves a paragraph from report to scene.
+
+**Simon Sinek** writes the way he speaks: common words, one idea, said plainly enough to be repeated by someone who heard it once. His test is worth stealing. Could a reader pass your story on from memory? If it takes notes to retell, it is too complicated.
+
+### What a human voice is made of
+
+Callahan warns about "the storytelling voice": telling that has been crafted and performed until it lands in an uncanny valley, close to natural and therefore off. The stories that work at work, he says, are small ones told the way you would tell a colleague. Cron puts the priority bluntly. Storytelling beats beautiful writing every time, and a beautifully written piece with no story earns a "who cares?". Write the way a good engineer talks when they are telling you about the worst bug they ever chased.
+
+- **Nouns and verbs with addresses.** "Sendmail 5" and "Sun's patch", where a vaguer writer would put "an older version" and "an update". The specific word is nearly always shorter than the general one plus its adjectives.
+- **Uneven sentences.** Length follows thought. A long sentence carries a chain of events, and the short one after it lands. If you read a paragraph aloud and it has a beat you could clap to, break it.
+- **A temperature.** The narrator has an attitude toward the events: dry, amused, quietly impressed. Engineers write and read understatement fluently. "This was a problem" does more than three exclamation marks.
+- **Trust.** The reader is told what happened and left to do the last step themselves. A writer who explains the joke, or the moral, does not believe in the story.
+- **Real units.** Dates, durations, dollars, version numbers, line counts.
+- **Small liberties.** A sentence that starts with "So" or "And". A fragment, once. A paragraph much shorter than its neighbours. Polish applied evenly to every sentence is itself a tell.
+
+### What gives a machine away
+
+The checker carries the word list. These are the habits behind the words, each with what to write in its place.
+
+| The habit | What it looks like | Write this |
+| :-- | :-- | :-- |
+| The reversal | "It wasn't a bug. It was a warning." | Say what it was. Drop the thing it wasn't. |
+| The self-answered question | "The cause? One missing server." | The statement, with no question in front of it. |
+| The announcer | "Here's the thing." "Let that sink in." | Nothing. Go straight to the fact. |
+| Triplets | "fast, simple, and reliable" | The one that matters to this story. |
+| Stacked one-liners | Eight paragraphs, eight sentences | Paragraphs of uneven length. |
+| The bolted-on moral | "The lesson? Always test your backups." | End on the fact that implies it. |
+| Hype | "legendary", "mind-blowing", "changed everything" | The number or the consequence. |
+| The generic actor | "One day, a developer noticed..." | The name, the date, the place. |
+| Abstractions that act | "Curiosity saved the internet." | A person doing a specific thing. |
+| The exit question | "What would you have done?" | Stop writing. |
+| The dash aside | An em-dash carrying an afterthought | A comma, a colon, or a new sentence. Never an em-dash. |
+
+One test catches most of what the table misses. Take any sentence and ask whether it could be moved, unchanged, into a post about a different story. "Sometimes the smallest details matter most" fits under any story ever told, so it is filler here. "Three millilightseconds came out as 558 miles" fits under exactly one.
+
 ## Part 6: The X post
 
 One post. 280 characters, which is about 45 words. `check_story.py` does the counting, because you cannot.
@@ -201,7 +250,7 @@ Other shapes that fit in 280: a real line someone said, with just enough context
 
 ## Part 7: The LinkedIn post
 
-LinkedIn renders plain text. No Markdown, so no asterisks, no headers, no bullets. The ceiling is 3,000 characters and a story rarely needs half of it: aim for 150 to 300 words. If the story is done at 160 words, it is done.
+LinkedIn renders plain text. No Markdown, so no asterisks, no headers, no bullets. The ceiling is 3,000 characters and a story never needs it: write 150 to 300 words, and treat 300 as a wall. If the story is done at 160 words, it is done. When a draft runs over, cut a whole beat or a whole detail. Squeezing every sentence a little is how accurate statements turn into inaccurate ones.
 
 ### The first line
 
@@ -209,7 +258,7 @@ On a phone the feed shows roughly the first 140 characters and then a "see more"
 
 > The chairman of the statistics department called to say the mail server could not send email farther than 500 miles.
 
-That line is the first beat of the story, and it is also the hook. Those should be the same sentence. A line that advertises the post ("I came across a fascinating story this week") spends the fold on nothing. Chris Anderson gives speakers about a minute to earn attention before the audience drifts; a feed gives you one line.
+That line is the first beat of the story, and it is also the hook. Those should be the same sentence. A line that advertises the post ("I came across a fascinating story this week") spends the fold on nothing. A speaker on a stage gets a little goodwill before the audience drifts. A feed gives you one line.
 
 ### The body
 
@@ -270,6 +319,10 @@ One paragraph of plain description, 60 to 120 words, covering:
 - **Medium.** 35mm film photograph, editorial ink illustration, linocut print, gouache, risograph, oil painting, technical blueprint, claymation still. Choose for the mood of the story and change it between stories. A feed where every image is the same glossy digital render looks generated.
 - **Exclusions.** End with "no text, no lettering, no logos, no watermark." Image models garble words, and a picture with misspelled signage is the visual version of an em-dash.
 
+### Imagined, but never false
+
+The image is an illustration, so it may show things no source describes: what the room looked like, where the lamp stood. It may not contradict the record (the wrong decade of hardware, a crowd where there was one person), and it should not be mistakable for a documentary photograph of a real event. When the record gives you nothing to see, take the object or the metaphor route.
+
 ### Real people
 
 When the story is about a real person, describe the figure and leave the name out of the prompt: approximate age, build, hair, clothing of the period, posture. Many image models refuse named likenesses or get them wrong, and a photorealistic fake portrait of a real person is not something to post beside a true story. Better options: show them from behind or in silhouette, show only their hands and their tools, or pick an illustrated medium that nobody could mistake for a photograph.
@@ -277,3 +330,43 @@ When the story is about a real person, describe the figure and leave the name ou
 ### Example
 
 > A paper road map of the eastern United States pinned to a corkboard in a cramped university server room in the mid 1990s, a wobbly red circle drawn by hand around North Carolina. In the foreground, slightly out of focus, a beige terminal glows green and a man's hand rests on the keyboard, a mug of cold coffee beside it. Seen from over his shoulder. Warm tungsten light from a desk lamp, deep shadows, muted palette of beige, green and red. 35mm film photograph, shallow depth of field, visible grain. Square 1:1 composition with the map at the centre. No text, no lettering, no logos, no watermark.
+
+## Part 9: The last read
+
+Read the finished file as someone who has never heard of the subject and owes you nothing, with your sources open beside it. For each question below, find the sentence that proves the answer. This is a read, so nothing gets written down except the fixes.
+
+1. **Two sentences.** Tell the story aloud, to nobody, in two sentences. If you cannot, the spine is missing, and no edit below will supply it.
+2. **The first line.** Does it carry at least two of these: a person, a time or place, trouble? Would it make sense if it were the only line a reader saw?
+3. **The break.** Point to the sentence where the unexpected thing happens. It should be in both posts.
+4. **The person.** Is one human being named and doing something by the second paragraph?
+5. **The cause.** Read only the joins between events. Each should be a "so" or a "but".
+6. **The stranger.** Is there a name, an acronym, or a piece of the incident that the reader needs and was never given? Is there an explanation of something any engineer knows?
+7. **The move test.** Could any sentence be moved into a post about a different story? Cut it or make it specific.
+8. **The ending.** Is the final sentence a fact or an image from this story?
+9. **The record.** Is every name, number, date, and quote backed by a line in `Sources`?
+10. **The X post alone.** Read it without the LinkedIn post. Does it stand?
+11. **The image.** Can the idea be said in one sentence, and is it something the reader has not seen before?
+12. **The rotation.** Does the opening differ from the last few stories in `stories/`? Is the image in a different medium from the last one?
+
+Last, the question that outranks the rest: if someone who was there read this, would they say that is what happened?
+
+## The books
+
+What each one gave this guide.
+
+| Book | Used for |
+| :-- | :-- |
+| *Putting Stories to Work*, Shawn Callahan | The test for whether something is a story at all. Time and place markers. The clarity story. Never announcing a story. Small stories over epics, and the warning about the storytelling voice. |
+| *Wired for Story*, Lisa Cron | The definition of story. The three questions a reader asks. Cause and effect. Need-to-know background. Specifics over generalities. Story over pretty sentences. |
+| *The Storytelling Animal*, Jonathan Gottschall | Trouble as the engine. Story as simulation. The warning about the mind's habit of inventing tidy causes. |
+| *The Hero's Journey*, Joseph Campbell | The three movements: departure, initiation, return. The refusal of the call. The boon. The stages themselves are set out in his earlier *The Hero with a Thousand Faces*. |
+| *The Art of Storytelling*, John Walsh | Seeing the story as scenes. Telling it from the view of someone who was there. The central truth. Planning the first words and the ending. Cutting needless detail, then adding description. |
+| *TED Talks*, Chris Anderson | The throughline. Ways to open. Ways to end, and ways endings fail. |
+| *Made to Stick*, Chip and Dan Heath | SUCCESs. The curiosity gap. The curse of knowledge. Human-scale numbers. The three plots. Core plus compact, for the X post. |
+| *Contagious*, Jonah Berger | STEPPS. High-arousal emotion. Triggers. The Trojan horse. |
+| *Influence*, Robert Cialdini | Which persuasion principles a true story may earn, and which are bait. The power of "because". |
+| *Start With Why*, Simon Sinek | Knowing the belief behind the story before telling it. Plain, repeatable language. |
+| *Ego Is the Enemy*, Ryan Holiday | The prose model: start inside the event, short declarative sentences, the idea stated once. Keeping the narrator out of the way. |
+| *The Storyteller's Secret*, Sejal Badani | The present-day frame around a past story. Withholding the answer, never the question. Naming the specific sensory detail. |
+
+*Contagious* appeared on the reading list under two subtitles. It is one book. Badani's *The Storyteller's Secret* is a novel, so it is here as a model of craft. Carmine Gallo wrote a business book with the same title, which is not used.
