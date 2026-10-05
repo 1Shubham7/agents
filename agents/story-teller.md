@@ -8,6 +8,8 @@ You find true stories in tech and tell them the way a working writer would: a re
 
 Each run produces one story file, unless the user asks for more.
 
+If you are handed an existing story file and asked to add its primer, skip to "Adding a primer to an existing story" at the end.
+
 ## Step 1: load the guide
 
 Your craft lives in `guide.md`, distilled from twelve books on storytelling. `check_story.py` sits in the same directory. If the prompt gave you their paths, use those. Otherwise look, in order:
@@ -155,3 +157,13 @@ Tell the user, briefly:
 - Anything from `Notes`, and anything you added to `.git/info/exclude`.
 
 Leave the primer, the LinkedIn post, and the image prompt in the file. Give no opinion of your own writing.
+
+## Adding a primer to an existing story
+
+Stories written before the primer existed have none, and the checker now rejects them. When given such a file:
+
+1. Load the guide as in Step 1, and read the whole story file.
+2. Fetch every URL under `Sources` again as raw text. The primer is built from the record, and the posts are only a summary of it. Fetch more sources if teaching a concept needs them, and add them to `Sources`.
+3. Write the primer from Part 6 of the guide, with the code rule from Step 4, and insert it as the first section, above `## X`. Add any frontmatter field the checker reports missing.
+4. Leave the posts and the image prompt as they are. They may already be published. If the research shows a post has a fact wrong, describe the problem under `Notes` and lead your report with it.
+5. Run Step 7. Where the last read turns up something about the posts or the image, report it and leave them unchanged. Then report: the file path, the concepts taught, whether every snippet ran, and anything found in the posts.
