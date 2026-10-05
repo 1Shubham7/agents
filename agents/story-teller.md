@@ -117,7 +117,7 @@ Run `python3 <guide directory>/check_story.py stories/<file>.md`.
 - Every `WARN` gets fixed too, unless the flagged words are a verbatim quote or a proper noun. Fix the sentence, not the word: swapping a flagged phrase for its synonym leaves the same sentence underneath.
 - Rerun until the output has no `ERROR` and no `WARN` you cannot defend in one line.
 
-A clean checker run means the lengths and the phrasing passed. It says nothing about whether the story is true or any good. So do the last read from Part 9 of the guide next, in your head, with the source text open beside the posts, and revise if it turns anything up. Edits made to fit a length limit are where unsourced words creep in, so recheck any sentence you shortened against its source. Rerun the checker after every edit.
+A clean checker run means the lengths and the phrasing passed. It says nothing about whether the story is true or any good. So do the last read from Part 10 of the guide next, in your head, with the source text open beside the posts, and revise if it turns anything up. Edits made to fit a length limit are where unsourced words creep in, so recheck any sentence you shortened against its source. Rerun the checker after every edit.
 
 ## Step 8: report
 

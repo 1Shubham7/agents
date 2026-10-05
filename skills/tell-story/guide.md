@@ -216,7 +216,31 @@ The checker carries the word list. These are the habits behind the words, each w
 
 One test catches most of what the table misses. Take any sentence and ask whether it could be moved, unchanged, into a post about a different story. "Sometimes the smallest details matter most" fits under any story ever told, so it is filler here. "Three millilightseconds came out as 558 miles" fits under exactly one.
 
-## Part 6: The X post
+## Part 6: The primer
+
+The first section of the story file is for one reader, the user, and it never gets posted. It explains the story and teaches whatever is needed to understand it. The user is going to put their name on these posts. When someone replies "wait, why would a zero timeout take three milliseconds?", they have to be able to answer.
+
+It is also for you. Write it before the posts. A post is a compression, and you cannot compress what you do not understand. If you cannot show the mechanism with an example that fits on one screen, you are not ready to put it in 280 characters, and the primer is where you find that out.
+
+### Who you are teaching
+
+The curse of knowledge rule from Part 4 flips here. In the posts, assume the craft and supply the incident. In the primer, assume a capable programmer who has never touched this particular language, tool, protocol, or era. They know what a loop, a pointer, a process, and a socket are. They may never have written Go, configured Sendmail, or heard of a certificate authority. Every term that belongs to the story's own corner of tech gets a sentence of definition the first time it appears.
+
+### The four parts
+
+Use `###` subsections, in this order.
+
+**The story in plain words.** One to three paragraphs. What happened, to whom, when, and why anyone cares, told in order, with no hook, nothing withheld, and nothing left for the reader to infer. It is the answer you would give a colleague who asked "what's that one about?".
+
+**The concepts.** One subsection for each concept the story stands on, titled with the concept's name. To find them, go through the story's turn and mark everything a reader must already understand for it to land. There are usually one to three. Put them in an order where each rests on the one before. Teach only as much of each as the story uses: a story about Go's loop variable needs the loop variable, and the rest of Go can wait.
+
+**How it plays out.** Walk through the hinge of the story again, this time with the concepts in hand. Use the actual line of code, config, or command from the incident when a source has it, quoted and linked, with the line that matters pointed out. This is where the reader should think "so that's why".
+
+**What the posts leave out.** The caveats, the simplifications, the details the sources dispute, and the objection a sharp reader is most likely to raise, with its answer. A post has no room for these. The user needs them before a commenter supplies them.
+
+A story with no technical concept in it (a licensing fight, an argument over a name, an obituary) keeps the first and last parts. Its middle teaches context where another story would teach code: who these people were, what the field looked like at the time, what was at stake.
+
+## Part 7: The X post
 
 One post. 280 characters, which is about 45 words. `check_story.py` does the counting, because you cannot.
 
@@ -248,7 +272,7 @@ A second shape, where the numbers do the work:
 
 Other shapes that fit in 280: a real line someone said, with just enough context to make it sting; a single object and what it cost; a date, a decision, and the thing nobody knew yet. Rotate. If the last three stories in `stories/` all open the same way, open this one differently.
 
-## Part 7: The LinkedIn post
+## Part 8: The LinkedIn post
 
 LinkedIn renders plain text. No Markdown, so no asterisks, no headers, no bullets. The ceiling is 3,000 characters and a story never needs it: write 150 to 300 words, and treat 300 as a wall. If the story is done at 160 words, it is done. When a draft runs over, cut a whole beat or a whole detail. Squeezing every sentence a little is how accurate statements turn into inaccurate ones.
 
@@ -292,7 +316,7 @@ What to notice: the hook is the first beat. The person has a name and a job by t
 
 Sentence lengths in that post run from three words to thirty. No paragraph has the same shape as the one before it.
 
-## Part 8: The image prompt
+## Part 9: The image prompt
 
 One image goes out with both posts. Its job is to stop a thumb, and then to add something the text did not say. The prompt is read by an image model that knows nothing about the story, so it has to be complete on its own.
 
@@ -331,7 +355,7 @@ When the story is about a real person, describe the figure and leave the name ou
 
 > A paper road map of the eastern United States pinned to a corkboard in a cramped university server room in the mid 1990s, a wobbly red circle drawn by hand around North Carolina. In the foreground, slightly out of focus, a beige terminal glows green and a man's hand rests on the keyboard, a mug of cold coffee beside it. Seen from over his shoulder. Warm tungsten light from a desk lamp, deep shadows, muted palette of beige, green and red. 35mm film photograph, shallow depth of field, visible grain. Square 1:1 composition with the map at the centre. No text, no lettering, no logos, no watermark.
 
-## Part 9: The last read
+## Part 10: The last read
 
 Read the finished file as someone who has never heard of the subject and owes you nothing, with your sources open beside it. For each question below, find the sentence that proves the answer. This is a read, so nothing gets written down except the fixes.
 
