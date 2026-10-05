@@ -1,6 +1,6 @@
 # The story-teller's guide
 
-This is the craft reference for the `story-teller` agent. Read all of it before writing a story, every run. It is distilled from the twelve books on storytelling, persuasion, and why ideas spread that are listed at the end, and bent toward one job: a true story from the world of tech, told twice, once in 280 characters and once as a LinkedIn post, with one image to carry both.
+This is the craft reference for the `story-teller` agent. Read all of it before writing a story, every run. It is distilled from the twelve books on storytelling, persuasion, and why ideas spread that are listed at the end, and bent toward one job: a true story from the world of tech, explained once for the user who will post it, then told twice, in 280 characters and as a LinkedIn post, with one image to carry both.
 
 Two things about the examples in here. They were checked against their sources when this was written, but they are in the guide to show craft, so re-verify any fact before you reuse it. And their shapes are illustrations. A story that copies the outline of an example is a template with new nouns in it, and readers can feel that.
 
@@ -110,7 +110,7 @@ Two more of Walsh's steps come as a pair: eliminate needless detail, then add de
 - Every name after the second or third. A post can hold one protagonist and one or two others.
 - Explanations of things your reader already knows. See the curse of knowledge in Part 4, which cuts both ways.
 - Identifiers the reader will never use: internal task names, ticket numbers, hostnames, the second version string. Keep one if it has flavour.
-- All but one paragraph of mechanism. Even a niche post holds a single technical idea, explained once, in the plainest words that are still correct. When the explanation runs longer than the events, you have written a postmortem with a person in the first line.
+- All but one paragraph of mechanism. Even a niche post holds a single technical idea, explained once, in the plainest words that are still correct. When the explanation runs longer than the events, you have written a postmortem with a person in the first line. The rest of the mechanism has a home: the primer, in Part 6.
 - Your favourite fact, if it does not serve the one sentence.
 
 ### Endings
@@ -247,8 +247,8 @@ Anderson's chapter on explanation gives the order, and it is the right one for a
 1. **Say what it is in one sentence**, in words the reader already owns.
 2. **Say what problem it exists to solve.** A thing with no purpose attached is a definition, and definitions do not stick.
 3. **Show the smallest example that exhibits it.** Code, a command with its output, a config stanza, a worked number. The Heaths' point about concreteness matters more in teaching than anywhere else: an abstraction means something different to every reader, and an example means the same thing to all of them.
-4. **Break it.** Show the failure the story turns on by changing the example as little as possible, and show what comes out. A before and after pair, a few lines each, teaches more than a page of description.
-5. **Offer one comparison to something familiar, and say where it stops being true.** An analogy pushed past its limit teaches something false.
+4. **Break it.** Show the failure the story turns on by changing the example as little as possible, and show what comes out. A before and after pair, a few lines each, teaches more than a page of description. When the failure cannot be reproduced on a laptop, walk through it in prose with concrete values: three named inputs, what should have happened to each, what did.
+5. **When a comparison to something familiar helps, offer one, and say where it stops being true.** An analogy pushed past its limit teaches something false, and a forced one is worse than none.
 
 A small diagram in a `text` fence earns its place when the concept has a shape: two names pointing at one address in memory, a timeline of which task held which lock, the hops a packet takes.
 
@@ -256,15 +256,15 @@ A small diagram in a `text` fence earns its place when the concept has a shape: 
 
 - **Small and whole.** A complete file of ten to twenty-five lines that the user can paste and run beats a fragment with `...` in it. Give every fence its language.
 - **Run it.** When the toolchain is on the machine, run every snippet and paste the real output beneath it in a `text` fence. The truth rule covers code: an example that does not do what the primer says it does is a fabrication. Anything you could not run gets a line under `Notes` saying so.
-- **Name the version when the behaviour depends on it.** Many stories are about behaviour that was later changed, so the same code prints different things before and after. Say which version produced each output.
-- **Point at the line.** One short comment on the line that matters. The rest stays uncommented.
-- **Code from the incident is quoted as it was.** If you trim it, say that you trimmed it, and link the source.
+- **Name the version when the behaviour depends on it.** Many stories are about behaviour that was later changed, so the same code prints different things before and after. Say which version produced each output, and how you got the old behaviour: an older toolchain, a language-version setting, a flag.
+- **Point at the line.** In your own examples, one short comment on the line that matters, and the rest uncommented.
+- **Code from the incident is quoted as it was.** No added comments: point at the line in the prose beneath it. If you trim the code, say that you trimmed it, and link the source.
 
 ### Voice and length
 
 Plain second person, the way you would explain it at a whiteboard. Everything in Part 5 about human prose holds here, including the rule against dashes as punctuation. Leave out the encouragement and the recap.
 
-The primer runs as long as the teaching needs, usually 400 to 900 words of prose plus code. Past that, check whether you have started teaching the subject and stopped teaching the story.
+The primer runs as long as the teaching needs: around 400 to 900 words of prose plus code for a story with one concept, up to about 1,500 for one that needs three. Past that, check whether you have started teaching the subject and stopped teaching the story.
 
 ### A whole primer
 
@@ -465,6 +465,9 @@ Read the finished file as someone who has never heard of the subject and owes yo
 10. **The X post alone.** Read it without the LinkedIn post. Does it stand?
 11. **The image.** Can the idea be said in one sentence, and is it something the reader has not seen before?
 12. **The rotation.** Does the opening differ from the last few stories in `stories/`? Is the image in a different medium from the last one?
+13. **The primer, cold.** After reading only the primer, could someone who has never used this language or tool explain the hinge of the story at a whiteboard, and answer the first "but why"?
+14. **The code.** Did every snippet run, and is each output shown the output it printed?
+15. **The agreement.** Do the primer and the posts say the same thing? A fact that differs between them is wrong in one of them, and it is usually the post, where it was squeezed.
 
 Last, the question that outranks the rest: if someone who was there read this, would they say that is what happened?
 
@@ -479,7 +482,7 @@ What each one gave this guide.
 | *The Storytelling Animal*, Jonathan Gottschall | Trouble as the engine. Story as simulation. The warning about the mind's habit of inventing tidy causes. |
 | *The Hero's Journey*, Joseph Campbell | The three movements: departure, initiation, return. The refusal of the call. The boon. The stages themselves are set out in his earlier *The Hero with a Thousand Faces*. |
 | *The Art of Storytelling*, John Walsh | Seeing the story as scenes. Telling it from the view of someone who was there. The central truth. Planning the first words and the ending. Cutting needless detail, then adding description. |
-| *TED Talks*, Chris Anderson | The throughline. Ways to open. Ways to end, and ways endings fail. |
+| *TED Talks*, Chris Anderson | The throughline. Ways to open. Ways to end, and ways endings fail. The order for explaining a concept, used in the primer. |
 | *Made to Stick*, Chip and Dan Heath | SUCCESs. The curiosity gap. The curse of knowledge. Human-scale numbers. The three plots. Core plus compact, for the X post. |
 | *Contagious*, Jonah Berger | STEPPS. High-arousal emotion. Triggers. The Trojan horse. |
 | *Influence*, Robert Cialdini | Which persuasion principles a true story may earn, and which are bait. The power of "because". |
