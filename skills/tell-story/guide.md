@@ -266,6 +266,74 @@ Plain second person, the way you would explain it at a whiteboard. Everything in
 
 The primer runs as long as the teaching needs, usually 400 to 900 words of prose plus code. Past that, check whether you have started teaching the subject and stopped teaching the story.
 
+### A whole primer
+
+This is the primer for the 500-mile email, the story whose posts appear in Parts 7 and 8. The Python was run, and the outputs are what it printed.
+
+````markdown
+## Primer
+
+### The story in plain words
+
+Some time between 1994 and 1997, Trey Harris was running the campus email system at the University of North Carolina at Chapel Hill. The chairman of the statistics department reported that their mail server could not deliver to anywhere more than about 500 miles away. Harris tested it and found it was true.
+
+The cause was a server upgrade that had swapped the mail software, Sendmail, for an older version while leaving the newer version's config file in place. The old software did not understand some of the settings and treated them as zero. One of those was how long to wait when connecting to another mail server. With a wait that short, only nearby servers could answer in time. Harris wrote the story up in 2002 for a sysadmin mailing list, and it has been passed around ever since.
+
+### Connect timeouts
+
+Before a mail server can hand a message to another server, it opens a TCP connection to it. Opening a connection means sending a packet and waiting for the reply. A connect timeout is how long the sender will wait for that reply before giving up. It exists so that one dead server cannot stall the whole mail queue.
+
+Here is a connect with a timeout of three thousandths of a second, to an address that never answers:
+
+```python
+import socket
+import time
+
+start = time.perf_counter()
+try:
+    # 192.0.2.1 is reserved for documentation and never answers
+    socket.create_connection(("192.0.2.1", 25), timeout=0.003)
+except OSError as err:
+    waited = (time.perf_counter() - start) * 1000
+    print(f"{type(err).__name__} after {waited:.1f} ms")
+```
+
+```text
+TimeoutError after 5.7 ms
+```
+
+Two things to notice. The program gave up far sooner than a person could perceive. And it asked for 3 ms but waited 5.7, because a timeout is a request to the operating system's timer, which fires when it gets around to it. That second point is why "zero" in the story did not mean "fail instantly". On Harris's machine a timeout of zero came out as slightly over three milliseconds.
+
+### Distance as time
+
+Nothing travels faster than light, so every mile between two machines adds a delay that no hardware can remove. Light covers about 186 miles in a millisecond.
+
+```python
+c = 299_792_458              # metres per second
+print(c * 0.003 / 1609.344)  # distance covered in 3 ms, in miles
+```
+
+```text
+558.8471911536626
+```
+
+Normally this delay is buried under bigger ones, such as routers queueing packets and servers being busy. Harris's campus network was unusually fast, so for a nearby and lightly loaded server, distance was most of the wait.
+
+### How it plays out
+
+Put the two together. Every outgoing message got about three milliseconds to reach the remote server and hear back. A server close by answered inside that window, and the mail went through. A server far enough away could not answer in time however fast it was, so the connect was abandoned and the mail failed. The line between the two was a distance, which is why a statistician could draw it on a map.
+
+Harris's own description of the cause: "a zero timeout would abort a connect call in slightly over three milliseconds".
+
+### What the posts leave out
+
+The arithmetic is tidier than the physics, and Harris says so in the FAQ he wrote afterwards. The reply has to travel back, so three milliseconds has to cover a round trip. Asked whether the figure should be six milliseconds, he answers: "Of course. This is one of the details I skipped in the story." Signals in copper and fibre also move well below the speed of light in a vacuum. On why he told it so vividly: "I took license. It made a better story that way."
+
+He no longer has his notes, and can date the events only to somewhere between 1994 and 1997. What he stands by is the behaviour: nearby mail was delivered, distant mail was not, and a zeroed timeout was the cause. If a commenter says the numbers do not quite add up, they are right, and the author agrees with them.
+````
+
+What to notice: the plain account has no hook and holds nothing back. Each concept gets one sentence of definition, one reason to exist, and one example small enough to run. The example's surprising output (5.7 where 3 was asked for) is used to explain the story's own oddity. The last part hands the user the weakest point of the story before a stranger can.
+
 ## Part 7: The X post
 
 One post. 280 characters, which is about 45 words. `check_story.py` does the counting, because you cannot.
