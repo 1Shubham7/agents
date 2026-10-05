@@ -240,6 +240,32 @@ Use `###` subsections, in this order.
 
 A story with no technical concept in it (a licensing fight, an argument over a name, an obituary) keeps the first and last parts. Its middle teaches context where another story would teach code: who these people were, what the field looked like at the time, what was at stake.
 
+### How to teach one concept
+
+Anderson's chapter on explanation gives the order, and it is the right one for a primer: start where the listener is, light a spark of curiosity, bring in concepts one at a time, use a metaphor, use examples. In practice:
+
+1. **Say what it is in one sentence**, in words the reader already owns.
+2. **Say what problem it exists to solve.** A thing with no purpose attached is a definition, and definitions do not stick.
+3. **Show the smallest example that exhibits it.** Code, a command with its output, a config stanza, a worked number. The Heaths' point about concreteness matters more in teaching than anywhere else: an abstraction means something different to every reader, and an example means the same thing to all of them.
+4. **Break it.** Show the failure the story turns on by changing the example as little as possible, and show what comes out. A before and after pair, a few lines each, teaches more than a page of description.
+5. **Offer one comparison to something familiar, and say where it stops being true.** An analogy pushed past its limit teaches something false.
+
+A small diagram in a `text` fence earns its place when the concept has a shape: two names pointing at one address in memory, a timeline of which task held which lock, the hops a packet takes.
+
+### Code in the primer
+
+- **Small and whole.** A complete file of ten to twenty-five lines that the user can paste and run beats a fragment with `...` in it. Give every fence its language.
+- **Run it.** When the toolchain is on the machine, run every snippet and paste the real output beneath it in a `text` fence. The truth rule covers code: an example that does not do what the primer says it does is a fabrication. Anything you could not run gets a line under `Notes` saying so.
+- **Name the version when the behaviour depends on it.** Many stories are about behaviour that was later changed, so the same code prints different things before and after. Say which version produced each output.
+- **Point at the line.** One short comment on the line that matters. The rest stays uncommented.
+- **Code from the incident is quoted as it was.** If you trim it, say that you trimmed it, and link the source.
+
+### Voice and length
+
+Plain second person, the way you would explain it at a whiteboard. Everything in Part 5 about human prose holds here, including the rule against dashes as punctuation. Leave out the encouragement and the recap.
+
+The primer runs as long as the teaching needs, usually 400 to 900 words of prose plus code. Past that, check whether you have started teaching the subject and stopped teaching the story.
+
 ## Part 7: The X post
 
 One post. 280 characters, which is about 45 words. `check_story.py` does the counting, because you cannot.
