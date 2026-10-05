@@ -27,7 +27,7 @@ SECTIONS = ("X", "LinkedIn", "Image prompt", "Sources")
 # (twitter-text v3 config).
 X_SINGLE_WEIGHT = ((0, 4351), (8192, 8205), (8208, 8223), (8242, 8247))
 
-DASHES = ("—", "–", " -- ")
+DASHES = ("\u2014", "\u2013", " -- ")
 
 VOCABULARY = (
     "delve", "leverage", "utilize", "robust", "seamless", "landscape", "realm",
@@ -68,6 +68,7 @@ EMOJI = re.compile(
 )
 URL = re.compile(r"https?://\S+|\bwww\.\S+")
 HASHTAG = re.compile(r"(?<!\w)#\w+")
+FENCE = re.compile(r"\s*(`{3,}|~{3,})")
 
 
 def x_length(text):
@@ -91,15 +92,35 @@ def parse(raw):
                 front[key.strip()] = value.strip()
 
     sections = {}
-    parts = re.split(r"^## +(.+?)\s*$", body, flags=re.M)
-    for name, text in zip(parts[1::2], parts[2::2]):
+    for name, text in split_sections(body).items():
         fence = re.search(r"```[^\n]*\n(.*?)\n```", text, re.S)
-        sections[name.strip()] = (fence.group(1) if fence else text).strip()
+        sections[name] = (fence.group(1) if fence else text).strip()
     return front, sections
 
 
+def split_sections(body):
+    """Split on `## ` headings, ignoring any that sit inside a code fence."""
+    sections, name, lines, fence = {}, None, [], None
+    for line in body.splitlines():
+        marker = FENCE.match(line)
+        if marker and fence is None:
+            fence = marker.group(1)
+        elif marker and line.strip() == marker.group(1) and marker.group(1).startswith(fence):
+            fence = None
+        elif fence is None and line.startswith("## "):
+            if name is not None:
+                sections[name] = "\n".join(lines)
+            name, lines = line[3:].strip(), []
+            continue
+        if name is not None:
+            lines.append(line)
+    if name is not None:
+        sections[name] = "\n".join(lines)
+    return sections
+
+
 def scan_style(name, text, errors, warnings):
-    lowered = text.lower().replace("’", "'")
+    lowered = text.lower().replace("\u2019", "'")
     for dash in DASHES:
         if dash in text:
             label = "double hyphen" if dash == " -- " else "em or en dash"
