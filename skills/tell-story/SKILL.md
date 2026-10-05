@@ -1,12 +1,12 @@
 ---
 name: tell-story
-description: Writes a new true story from tech as an X post within 280 characters, a LinkedIn post, and an image prompt, saved as one file in stories/. Use when the user asks for a story, a tech story, or a story post for X/Twitter or LinkedIn. Not for technical articles (write-article) or explanations (teacher).
-argument-hint: [topic, person, or area] [number of stories]
+description: Writes a new true story from tech, saved as one file in stories/ with a primer that teaches the user the story and its concepts with examples and code, an X post within 280 characters, a LinkedIn post, and an image prompt. Use when the user asks for a story, a tech story, or a story post for X/Twitter or LinkedIn, or asks for a primer to be added to an existing story file. Not for technical articles (write-article) or explanations (teacher).
+argument-hint: [topic, person, or area] [number of stories] | [path to a story file that needs a primer]
 ---
 
 Tell a story about: **$ARGUMENTS**
 
-If nothing follows the colon, the agent picks the story.
+If nothing follows the colon, the agent picks the story. If what follows is a path to an existing file in `stories/`, the job is to add a primer to that story, and the agent is told so in place of a topic.
 
 You are the dispatcher. The `story-teller` agent chooses, researches, and writes; you hand it what it needs and relay what it returns. When installed as a plugin the agent appears as `agents:story-teller`; use whichever name is listed.
 
@@ -29,4 +29,4 @@ When the user asks for several stories, run the agent once per story, one after 
 
 ## 3. Relay
 
-Pass on the agent's report: the file path, the story in one line, the X post with the character counts, and any notes about facts to double-check before posting. The posts are finished work, so relay them as written.
+Pass on the agent's report: the file path, the story in one line, the concepts the primer teaches and whether its code was run, the X post with the character counts, and any notes about facts to double-check before posting. Tell the user to read the primer at the top of the file before posting. The posts are finished work, so relay them as written.

@@ -4,7 +4,8 @@
 Usage: check_story.py stories/<file>.md
 
 Counting characters and spotting stock phrases is exactly what a language
-model is bad at, so this script does it instead. ERROR lines must be fixed.
+model is bad at, so this script does it instead. It also checks that the
+primer, the part that teaches the user the story, is present and comes first. ERROR lines must be fixed.
 WARN lines must each be fixed or kept on purpose. Exit code is 1 when there
 is at least one ERROR.
 """
@@ -19,15 +20,23 @@ LINKEDIN_MAX_WORDS = 300  # the guide's ceiling for a story post
 LINKEDIN_FOLD = 140  # roughly what shows before "see more" on a phone
 LINKEDIN_MAX_HASHTAGS = 3
 IMAGE_WORDS = (60, 120)
+PRIMER_MIN_WORDS = 250  # prose only, code blocks not counted
+PRIMER_MIN_HEADINGS = 2
+
+# Areas where a primer with no code block has almost certainly skipped the example.
+CODE_AREAS = (
+    "languages", "tools", "devops", "os", "networking", "security", "databases", "web", "ai",
+)
 
 REQUIRED_FRONTMATTER = ("title", "date", "subject", "area", "scope", "opening", "image")
-SECTIONS = ("X", "LinkedIn", "Image prompt", "Sources")
+SECTIONS = ("Primer", "X", "LinkedIn", "Image prompt", "Sources")
+POSTS = ("X", "LinkedIn", "Image prompt")  # their body is the first fenced block
 
 # X counts these code point ranges as 1 character and everything else as 2
 # (twitter-text v3 config).
 X_SINGLE_WEIGHT = ((0, 4351), (8192, 8205), (8208, 8223), (8242, 8247))
 
-DASHES = ("—", "–", " -- ")
+DASHES = ("\u2014", "\u2013", " -- ")
 
 VOCABULARY = (
     "delve", "leverage", "utilize", "robust", "seamless", "landscape", "realm",
@@ -68,6 +77,7 @@ EMOJI = re.compile(
 )
 URL = re.compile(r"https?://\S+|\bwww\.\S+")
 HASHTAG = re.compile(r"(?<!\w)#\w+")
+FENCE = re.compile(r"\s*(`{3,}|~{3,})")
 
 
 def x_length(text):
@@ -91,15 +101,52 @@ def parse(raw):
                 front[key.strip()] = value.strip()
 
     sections = {}
-    parts = re.split(r"^## +(.+?)\s*$", body, flags=re.M)
-    for name, text in zip(parts[1::2], parts[2::2]):
+    for name, text in split_sections(body).items():
         fence = re.search(r"```[^\n]*\n(.*?)\n```", text, re.S)
-        sections[name.strip()] = (fence.group(1) if fence else text).strip()
+        sections[name] = (fence.group(1) if fence and name in POSTS else text).strip()
     return front, sections
 
 
-def scan_style(name, text, errors, warnings):
-    lowered = text.lower().replace("’", "'")
+def split_sections(body):
+    """Split on `## ` headings, ignoring any that sit inside a code fence."""
+    sections, name, lines, fence = {}, None, [], None
+    for line in body.splitlines():
+        marker = FENCE.match(line)
+        if marker and fence is None:
+            fence = marker.group(1)
+        elif marker and line.strip() == marker.group(1) and marker.group(1).startswith(fence):
+            fence = None
+        elif fence is None and line.startswith("## "):
+            if name is not None:
+                sections[name] = "\n".join(lines)
+            name, lines = line[3:].strip(), []
+            continue
+        if name is not None:
+            lines.append(line)
+    if name is not None:
+        sections[name] = "\n".join(lines)
+    return sections
+
+
+def split_code(text):
+    """Return (prose with code removed, list of fenced code blocks)."""
+    prose, blocks, block, fence = [], [], [], None
+    for line in text.splitlines():
+        marker = FENCE.match(line)
+        if marker and fence is None:
+            fence, block = marker.group(1), []
+        elif marker and line.strip() == marker.group(1) and marker.group(1).startswith(fence):
+            fence = None
+            blocks.append("\n".join(block))
+        elif fence is None:
+            prose.append(line)
+        else:
+            block.append(line)
+    return re.sub(r"`[^`\n]+`", "", "\n".join(prose)), blocks
+
+
+def scan_style(name, text, errors, warnings, post=True):
+    lowered = text.lower().replace("\u2019", "'")
     for dash in DASHES:
         if dash in text:
             label = "double hyphen" if dash == " -- " else "em or en dash"
@@ -107,6 +154,8 @@ def scan_style(name, text, errors, warnings):
     for word in VOCABULARY:
         if re.search(rf"\b{re.escape(word)}", lowered):
             warnings.append(f'{name}: stock vocabulary "{word}"')
+    if not post:
+        return
     for phrase in PHRASES:
         if phrase in lowered:
             warnings.append(f'{name}: stock phrase "{phrase}"')
@@ -145,6 +194,27 @@ def check(path):
     for name in SECTIONS:
         if not sections.get(name):
             errors.append(f"missing or empty section `## {name}`")
+
+    if sections and next(iter(sections)) != "Primer":
+        errors.append("`## Primer` must be the first section of the file")
+
+    primer = sections.get("Primer", "")
+    if primer:
+        prose, blocks = split_code(primer)
+        words = len(prose.split())
+        headings = len(re.findall(r"^### ", prose, re.M))
+        info.append(f"Primer: {words} words, {len(blocks)} code blocks, {headings} subsections")
+        if words < PRIMER_MIN_WORDS:
+            warnings.append(f"Primer: only {words} words of prose, too thin to teach anything")
+        if headings < PRIMER_MIN_HEADINGS:
+            warnings.append("Primer: use `### ` subsections (the story, each concept, how it plays out)")
+        if not blocks and front.get("area") in CODE_AREAS:
+            warnings.append(
+                f"Primer: no code block in a story about {front['area']}. Show the smallest example."
+            )
+        if any(not block.strip() for block in blocks):
+            errors.append("Primer: empty code block")
+        scan_style("Primer", prose, errors, warnings, post=False)
 
     x = sections.get("X", "")
     if x:

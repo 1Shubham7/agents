@@ -1,6 +1,6 @@
 # The story-teller's guide
 
-This is the craft reference for the `story-teller` agent. Read all of it before writing a story, every run. It is distilled from the twelve books on storytelling, persuasion, and why ideas spread that are listed at the end, and bent toward one job: a true story from the world of tech, told twice, once in 280 characters and once as a LinkedIn post, with one image to carry both.
+This is the craft reference for the `story-teller` agent. Read all of it before writing a story, every run. It is distilled from the twelve books on storytelling, persuasion, and why ideas spread that are listed at the end, and bent toward one job: a true story from the world of tech, explained once for the user who will post it, then told twice, in 280 characters and as a LinkedIn post, with one image to carry both.
 
 Two things about the examples in here. They were checked against their sources when this was written, but they are in the guide to show craft, so re-verify any fact before you reuse it. And their shapes are illustrations. A story that copies the outline of an example is a template with new nouns in it, and readers can feel that.
 
@@ -110,7 +110,7 @@ Two more of Walsh's steps come as a pair: eliminate needless detail, then add de
 - Every name after the second or third. A post can hold one protagonist and one or two others.
 - Explanations of things your reader already knows. See the curse of knowledge in Part 4, which cuts both ways.
 - Identifiers the reader will never use: internal task names, ticket numbers, hostnames, the second version string. Keep one if it has flavour.
-- All but one paragraph of mechanism. Even a niche post holds a single technical idea, explained once, in the plainest words that are still correct. When the explanation runs longer than the events, you have written a postmortem with a person in the first line.
+- All but one paragraph of mechanism. Even a niche post holds a single technical idea, explained once, in the plainest words that are still correct. When the explanation runs longer than the events, you have written a postmortem with a person in the first line. The rest of the mechanism has a home: the primer, in Part 6.
 - Your favourite fact, if it does not serve the one sentence.
 
 ### Endings
@@ -216,7 +216,125 @@ The checker carries the word list. These are the habits behind the words, each w
 
 One test catches most of what the table misses. Take any sentence and ask whether it could be moved, unchanged, into a post about a different story. "Sometimes the smallest details matter most" fits under any story ever told, so it is filler here. "Three millilightseconds came out as 558 miles" fits under exactly one.
 
-## Part 6: The X post
+## Part 6: The primer
+
+The first section of the story file is for one reader, the user, and it never gets posted. It explains the story and teaches whatever is needed to understand it. The user is going to put their name on these posts. When someone replies "wait, why would a zero timeout take three milliseconds?", they have to be able to answer.
+
+It is also for you. Write it before the posts. A post is a compression, and you cannot compress what you do not understand. If you cannot show the mechanism with an example that fits on one screen, you are not ready to put it in 280 characters, and the primer is where you find that out.
+
+### Who you are teaching
+
+The curse of knowledge rule from Part 4 flips here. In the posts, assume the craft and supply the incident. In the primer, assume a capable programmer who has never touched this particular language, tool, protocol, or era. They know what a loop, a pointer, a process, and a socket are. They may never have written Go, configured Sendmail, or heard of a certificate authority. Every term that belongs to the story's own corner of tech gets a sentence of definition the first time it appears.
+
+### The four parts
+
+Use `###` subsections, in this order.
+
+**The story in plain words.** One to three paragraphs. What happened, to whom, when, and why anyone cares, told in order, with no hook, nothing withheld, and nothing left for the reader to infer. It is the answer you would give a colleague who asked "what's that one about?".
+
+**The concepts.** One subsection for each concept the story stands on, titled with the concept's name. To find them, go through the story's turn and mark everything a reader must already understand for it to land. There are usually one to three. Put them in an order where each rests on the one before. Teach only as much of each as the story uses: a story about Go's loop variable needs the loop variable, and the rest of Go can wait.
+
+**How it plays out.** Walk through the hinge of the story again, this time with the concepts in hand. Use the actual line of code, config, or command from the incident when a source has it, quoted and linked, with the line that matters pointed out. This is where the reader should think "so that's why".
+
+**What the posts leave out.** The caveats, the simplifications, the details the sources dispute, and the objection a sharp reader is most likely to raise, with its answer. A post has no room for these. The user needs them before a commenter supplies them.
+
+A story with no technical concept in it (a licensing fight, an argument over a name, an obituary) keeps the first and last parts. Its middle teaches context where another story would teach code: who these people were, what the field looked like at the time, what was at stake.
+
+### How to teach one concept
+
+Anderson's chapter on explanation gives the order, and it is the right one for a primer: start where the listener is, light a spark of curiosity, bring in concepts one at a time, use a metaphor, use examples. In practice:
+
+1. **Say what it is in one sentence**, in words the reader already owns.
+2. **Say what problem it exists to solve.** A thing with no purpose attached is a definition, and definitions do not stick.
+3. **Show the smallest example that exhibits it.** Code, a command with its output, a config stanza, a worked number. The Heaths' point about concreteness matters more in teaching than anywhere else: an abstraction means something different to every reader, and an example means the same thing to all of them.
+4. **Break it.** Show the failure the story turns on by changing the example as little as possible, and show what comes out. A before and after pair, a few lines each, teaches more than a page of description. When the failure cannot be reproduced on a laptop, walk through it in prose with concrete values: three named inputs, what should have happened to each, what did.
+5. **When a comparison to something familiar helps, offer one, and say where it stops being true.** An analogy pushed past its limit teaches something false, and a forced one is worse than none.
+
+A small diagram in a `text` fence earns its place when the concept has a shape: two names pointing at one address in memory, a timeline of which task held which lock, the hops a packet takes.
+
+### Code in the primer
+
+- **Small and whole.** A complete file of ten to twenty-five lines that the user can paste and run beats a fragment with `...` in it. Give every fence its language.
+- **Run it.** When the toolchain is on the machine, run every snippet and paste the real output beneath it in a `text` fence. The truth rule covers code: an example that does not do what the primer says it does is a fabrication. Anything you could not run gets a line under `Notes` saying so.
+- **Name the version when the behaviour depends on it.** Many stories are about behaviour that was later changed, so the same code prints different things before and after. Say which version produced each output, and how you got the old behaviour: an older toolchain, a language-version setting, a flag.
+- **Point at the line.** In your own examples, one short comment on the line that matters, and the rest uncommented.
+- **Code from the incident is quoted as it was.** No added comments: point at the line in the prose beneath it. If you trim the code, say that you trimmed it, and link the source.
+
+### Voice and length
+
+Plain second person, the way you would explain it at a whiteboard. Everything in Part 5 about human prose holds here, including the rule against dashes as punctuation. Leave out the encouragement and the recap.
+
+The primer runs as long as the teaching needs: around 400 to 900 words of prose plus code for a story with one concept, up to about 1,500 for one that needs three. Past that, check whether you have started teaching the subject and stopped teaching the story.
+
+### A whole primer
+
+This is the primer for the 500-mile email, the story whose posts appear in Parts 7 and 8. The Python was run, and the outputs are what it printed.
+
+````markdown
+## Primer
+
+### The story in plain words
+
+Some time between 1994 and 1997, Trey Harris was running the campus email system at the University of North Carolina at Chapel Hill. The chairman of the statistics department reported that their mail server could not deliver to anywhere more than about 500 miles away. Harris tested it and found it was true.
+
+The cause was a server upgrade that had swapped the mail software, Sendmail, for an older version while leaving the newer version's config file in place. The old software did not understand some of the settings and treated them as zero. One of those was how long to wait when connecting to another mail server. With a wait that short, only nearby servers could answer in time. Harris wrote the story up in 2002 for a sysadmin mailing list, and it has been passed around ever since.
+
+### Connect timeouts
+
+Before a mail server can hand a message to another server, it opens a TCP connection to it. Opening a connection means sending a packet and waiting for the reply. A connect timeout is how long the sender will wait for that reply before giving up. It exists so that one dead server cannot stall the whole mail queue.
+
+Here is a connect with a timeout of three thousandths of a second, to an address that never answers:
+
+```python
+import socket
+import time
+
+start = time.perf_counter()
+try:
+    # 192.0.2.1 is reserved for documentation and never answers
+    socket.create_connection(("192.0.2.1", 25), timeout=0.003)
+except OSError as err:
+    waited = (time.perf_counter() - start) * 1000
+    print(f"{type(err).__name__} after {waited:.1f} ms")
+```
+
+```text
+TimeoutError after 5.7 ms
+```
+
+Two things to notice. The program gave up far sooner than a person could perceive. And it asked for 3 ms but waited 5.7, because a timeout is a request to the operating system's timer, which fires when it gets around to it. That second point is why "zero" in the story did not mean "fail instantly". On Harris's machine a timeout of zero came out as slightly over three milliseconds.
+
+### Distance as time
+
+Nothing travels faster than light, so every mile between two machines adds a delay that no hardware can remove. Light covers about 186 miles in a millisecond.
+
+```python
+c = 299_792_458              # metres per second
+print(c * 0.003 / 1609.344)  # distance covered in 3 ms, in miles
+```
+
+```text
+558.8471911536626
+```
+
+Normally this delay is buried under bigger ones, such as routers queueing packets and servers being busy. Harris's campus network was unusually fast, so for a nearby and lightly loaded server, distance was most of the wait.
+
+### How it plays out
+
+Put the two together. Every outgoing message got about three milliseconds to reach the remote server and hear back. A server close by answered inside that window, and the mail went through. A server far enough away could not answer in time however fast it was, so the connect was abandoned and the mail failed. The line between the two was a distance, which is why a statistician could draw it on a map.
+
+Harris's own description of the cause: "a zero timeout would abort a connect call in slightly over three milliseconds".
+
+### What the posts leave out
+
+The arithmetic is tidier than the physics, and Harris says so in the FAQ he wrote afterwards. The reply has to travel back, so three milliseconds has to cover a round trip. Asked whether the figure should be six milliseconds, he answers: "Of course. This is one of the details I skipped in the story." Signals in copper and fibre also move well below the speed of light in a vacuum. On why he told it so vividly: "I took license. It made a better story that way."
+
+He no longer has his notes, and can date the events only to somewhere between 1994 and 1997. What he stands by is the behaviour: nearby mail was delivered, distant mail was not, and a zeroed timeout was the cause. If a commenter says the numbers do not quite add up, they are right, and the author agrees with them.
+````
+
+What to notice: the plain account has no hook and holds nothing back. Each concept gets one sentence of definition, one reason to exist, and one example small enough to run. The example's surprising output (5.7 where 3 was asked for) is used to explain the story's own oddity. The last part hands the user the weakest point of the story before a stranger can.
+
+## Part 7: The X post
 
 One post. 280 characters, which is about 45 words. `check_story.py` does the counting, because you cannot.
 
@@ -248,7 +366,7 @@ A second shape, where the numbers do the work:
 
 Other shapes that fit in 280: a real line someone said, with just enough context to make it sting; a single object and what it cost; a date, a decision, and the thing nobody knew yet. Rotate. If the last three stories in `stories/` all open the same way, open this one differently.
 
-## Part 7: The LinkedIn post
+## Part 8: The LinkedIn post
 
 LinkedIn renders plain text. No Markdown, so no asterisks, no headers, no bullets. The ceiling is 3,000 characters and a story never needs it: write 150 to 300 words, and treat 300 as a wall. If the story is done at 160 words, it is done. When a draft runs over, cut a whole beat or a whole detail. Squeezing every sentence a little is how accurate statements turn into inaccurate ones.
 
@@ -292,7 +410,7 @@ What to notice: the hook is the first beat. The person has a name and a job by t
 
 Sentence lengths in that post run from three words to thirty. No paragraph has the same shape as the one before it.
 
-## Part 8: The image prompt
+## Part 9: The image prompt
 
 One image goes out with both posts. Its job is to stop a thumb, and then to add something the text did not say. The prompt is read by an image model that knows nothing about the story, so it has to be complete on its own.
 
@@ -331,7 +449,7 @@ When the story is about a real person, describe the figure and leave the name ou
 
 > A paper road map of the eastern United States pinned to a corkboard in a cramped university server room in the mid 1990s, a wobbly red circle drawn by hand around North Carolina. In the foreground, slightly out of focus, a beige terminal glows green and a man's hand rests on the keyboard, a mug of cold coffee beside it. Seen from over his shoulder. Warm tungsten light from a desk lamp, deep shadows, muted palette of beige, green and red. 35mm film photograph, shallow depth of field, visible grain. Square 1:1 composition with the map at the centre. No text, no lettering, no logos, no watermark.
 
-## Part 9: The last read
+## Part 10: The last read
 
 Read the finished file as someone who has never heard of the subject and owes you nothing, with your sources open beside it. For each question below, find the sentence that proves the answer. This is a read, so nothing gets written down except the fixes.
 
@@ -347,6 +465,9 @@ Read the finished file as someone who has never heard of the subject and owes yo
 10. **The X post alone.** Read it without the LinkedIn post. Does it stand?
 11. **The image.** Can the idea be said in one sentence, and is it something the reader has not seen before?
 12. **The rotation.** Does the opening differ from the last few stories in `stories/`? Is the image in a different medium from the last one?
+13. **The primer, cold.** After reading only the primer, could someone who has never used this language or tool explain the hinge of the story at a whiteboard, and answer the first "but why"?
+14. **The code.** Did every snippet run, and is each output shown the output it printed?
+15. **The agreement.** Do the primer and the posts say the same thing? A fact that differs between them is wrong in one of them, and it is usually the post, where it was squeezed.
 
 Last, the question that outranks the rest: if someone who was there read this, would they say that is what happened?
 
@@ -361,7 +482,7 @@ What each one gave this guide.
 | *The Storytelling Animal*, Jonathan Gottschall | Trouble as the engine. Story as simulation. The warning about the mind's habit of inventing tidy causes. |
 | *The Hero's Journey*, Joseph Campbell | The three movements: departure, initiation, return. The refusal of the call. The boon. The stages themselves are set out in his earlier *The Hero with a Thousand Faces*. |
 | *The Art of Storytelling*, John Walsh | Seeing the story as scenes. Telling it from the view of someone who was there. The central truth. Planning the first words and the ending. Cutting needless detail, then adding description. |
-| *TED Talks*, Chris Anderson | The throughline. Ways to open. Ways to end, and ways endings fail. |
+| *TED Talks*, Chris Anderson | The throughline. Ways to open. Ways to end, and ways endings fail. The order for explaining a concept, used in the primer. |
 | *Made to Stick*, Chip and Dan Heath | SUCCESs. The curiosity gap. The curse of knowledge. Human-scale numbers. The three plots. Core plus compact, for the X post. |
 | *Contagious*, Jonah Berger | STEPPS. High-arousal emotion. Triggers. The Trojan horse. |
 | *Influence*, Robert Cialdini | Which persuasion principles a true story may earn, and which are bait. The power of "because". |
