@@ -1,7 +1,7 @@
 {
   "name": "agents",
-  "description": "Shubham's personal Claude Code agents: standup-gen (plain-spoken standup summaries from your session), tech-writer + article-critic (a write/review pipeline for technical articles that read as human-written, run via the write-article skill), story-teller (true tech stories as an X post, a LinkedIn post, and an image prompt, each with a primer that teaches you the story first, run via the tell-story skill), and teacher (teaches concepts and tools from the ground up with examples and diagrams).",
-  "version": "1.5.0",
+  "description": "Shubham's personal Claude Code agents: standup-gen (plain-spoken standup summaries from your session), tech-writer + article-critic (a write/review pipeline for technical articles that read as human-written, run via the write-article skill), story-teller (true tech stories as an X post, a LinkedIn post, and an image prompt, each with a primer that teaches you the story first, run via the tell-story skill), teacher (teaches concepts and tools from the ground up with examples and diagrams), and cfp-writer (conference talk proposals researched against what the conference accepted before, run via the write-cfp skill).",
+  "version": "1.6.0",
   "author": {
     "name": "Shubham Singh",
     "url": "https://github.com/1Shubham7"
@@ -16,6 +16,9 @@
     "editing",
     "productivity",
     "teaching",
-    "agent"
+    "agent",
+    "cfp",
+    "conference",
+    "speaking"
   ]
 }
