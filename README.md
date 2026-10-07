@@ -53,6 +53,18 @@ Two rules shape everything it writes. The story has to be true: it fetches at le
 
 Usage: `/tell-story` for a story of its choosing, `/tell-story the history of grep` or `/tell-story something about Kubernetes networking` to steer it, or just "tell me a tech story". Stories written before the primer existed can get one added: `/tell-story stories/<file>.md`.
 
+### cfp-writer (and the write-cfp skill)
+
+Writes conference talk proposals that get accepted, or at least do not get rejected for the reasons most proposals do.
+
+It works from three things that live in `skills/write-cfp/`. `guide.md` is the craft: how a tired reviewer reads a proposal in ninety seconds, what the accepted and rejected samples taught, the house style learned from hand edits to earlier drafts (name the areas and save the list for the talk, no asides written for effect, no praise for the talk in place of a description of it, "attendees" never "you", speak as the person who will stand on the stage), how to write the title, the description and the benefits section, how to sound like an experienced speaker in the talk's own field, and the tells that give a machine away. `samples/` holds real proposals the user has submitted, each with its outcome in the frontmatter, so the agent sees what worked and what did not. `outcomes.md` is the memory: one line per submission with the result and the user's own view of why, updated as results come in, so every later proposal knows more than the last.
+
+It writes for one conference at a time and will not write without one. Given the conference, it fetches the CFP page for the form fields and their character limits, then reads the programme from the last one or two editions and writes down what the accepted talks have in common: title length and shape, whether they are first person, what they name, what is absent. Those notes land in `skills/write-cfp/conferences/<slug>.md` for the next run. The proposal is then written to fit that conference, in the voice of a working engineer, a maintainer, or a compliance practitioner depending on the talk, with every specific traced to something the user supplied and anything missing left as a visible `[NEED: ...]` rather than invented.
+
+Drafts go to `cfps/<conference>/<talk>.md`, which is in `.gitignore`; in any other repository the agent adds it to `.git/info/exclude`.
+
+Usage: `/write-cfp <talk idea> for <conference>`, or just "write a CFP for X". Have the conference name, the idea, who is speaking, and any real numbers or incidents you want in it. When the result comes in, add a line to `outcomes.md` saying what happened and why; that is how the agent gets better.
+
 ### teacher
 
 Teaches you concepts, tools, and code properly, assuming no prior knowledge. Builds explanations from the ground up (what the thing is, what problem it solves, how it works, then the details), uses concrete examples for anything abstract, and draws ASCII or Mermaid diagrams for anything with structure or flow.
