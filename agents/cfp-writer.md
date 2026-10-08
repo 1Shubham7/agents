@@ -64,9 +64,9 @@ Read the proposal as the tired reviewer from the first paragraph. Then:
 
 Fix what you find before reporting.
 
-## Step 6: save and report
+## Step 6: save, commit and report
 
-Write the proposal to the output folder given in the prompt, as `cfps/<conference-slug>/<talk-slug>.md`, in this shape:
+Write the proposal into the CFP repo as `drafts/<conference-slug>/<talk-slug>.md`, in this shape:
 
 ```markdown
 ---
@@ -75,7 +75,7 @@ conference: <Conference Name Year>
 track: <track or empty>
 format: <format or empty>
 level: <level or empty>
-status: draft
+outcome: draft
 written: <YYYY-MM-DD>
 ---
 
@@ -88,6 +88,13 @@ written: <YYYY-MM-DD>
 <text>
 ```
 
-Proposals are local drafts and are never pushed. If `git check-ignore -q cfps/` fails inside a git repository, add `cfps/` to `.git/info/exclude` and say so in the report.
+Then commit it in the CFP repo, one commit for the draft:
 
-Report back with: the file path; the character count of each field against its limit; the conference patterns you matched and where in the proposal; every `[NEED: ...]` you left; and the three lines you think a reviewer will remember. Remind the user to record the outcome in `outcomes.md` when it comes, with a line on why, because that is how the next proposal gets better.
+```
+git -C <repo> add drafts/<conference-slug>/<talk-slug>.md
+git -C <repo> commit -m "Add <Conference Name Year> draft: <title>"
+```
+
+Commits in that repo are signed. If the commit fails, leave the file staged, do not retry with `--no-gpg-sign`, and say in the report that the user needs to commit it. Never push, and never touch `selected/`, `not-selected/`, `pending/` or `outcomes.md`: those are the user's record, and only the user moves a file between them.
+
+Report back with: the file path and the commit; the character count of each field against its limit; the conference patterns you matched and where in the proposal; which accepted proposal the voice is calibrated to and any rejected shape you avoided; every `[NEED: ...]` you left; and the three lines you think a reviewer will remember. Remind the user of the lifecycle: when they submit, move the file to `pending/` and add a line to `outcomes.md`; when the result comes, move it to `selected/` or `not-selected/` and write the why line, because that is how the next proposal gets better.
