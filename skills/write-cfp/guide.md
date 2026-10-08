@@ -1,6 +1,6 @@
 # The CFP writer's guide
 
-A talk proposal is not an article and not a sales page. It is a bet placed with a stranger who has ninety seconds and a stack of two hundred others. This guide is what the proposals in `samples/` taught, what the user's own edits taught, and what programme committees say they look for. Read all of it before writing.
+A talk proposal is not an article and not a sales page. It is a bet placed with a stranger who has ninety seconds and a stack of two hundred others. This guide is what the proposals in the CFP repo (`selected/`, `not-selected/`, `pending/`) taught, what the user's own edits taught, and what programme committees say they look for. Read all of it before writing.
 
 ## Part 1: How a reviewer reads
 
@@ -14,9 +14,9 @@ They are asking three questions, in this order:
 
 Two things end a proposal early. The first is a vendor pitch: a product name in the title, a description that is a feature list, "benefits" that are benefits to the company. Open source projects are welcome when the talk is about the problem and the project is one of the tools. The second is a proposal that could have been written without doing the work: generic, correct, and empty.
 
-## Part 2: What the samples taught
+## Part 2: What the submitted proposals taught
 
-Read `samples/` before this section makes sense. Each file carries its outcome.
+Read `selected/` and `not-selected/` in the CFP repo before this section makes sense. Each file carries its outcome in its frontmatter, and the repo's `outcomes.md` carries the user's view of why. The proposals in `pending/` have no result yet; read them for voice, not for what works.
 
 **The accepted one**, the Cilium anti-patterns lightning talk, was accepted at four events. What it does:
 
@@ -27,7 +27,7 @@ Read `samples/` before this section makes sense. Each file carries its outcome.
 - The title names the tool, the form (anti-patterns), and the price paid ("I Learned the Hard Way"). It is a story in nine words.
 - It is first person throughout, and it is honest that most of the knowledge came from things going wrong.
 
-**The not-yet-accepted one**, the audit logging talk, has the same bones and has not been picked up. The user's own view of why lives in `outcomes.md`; treat the following as hypotheses to test against the target conference, not rules:
+**The not-yet-accepted one**, the audit logging talk, has the same bones and has not been picked up. The user's own view of why lives in the repo's `outcomes.md`; treat the following as hypotheses to test against the target conference, not rules:
 
 - The opener is a scene, which is good, but the talk then promises four things (enable, write policies, ship logs, alert with Falco) for a single slot. Reviewers may read that as a tutorial rather than a talk with a point.
 - The title carries an arrow diagram, which some forms strip and some reviewers find gimmicky.
@@ -58,7 +58,7 @@ The user rewrote the CRA drafts by hand several times. The pattern in what they 
 
 ## Part 4: Title
 
-The title is written last and read first. Patterns from the accepted sample and from conference programmes:
+The title is written last and read first. Patterns from the accepted proposals and from conference programmes:
 
 - Name the thing: the tool, the law, the failure. "Cilium Network Policy Anti-Patterns" tells a reviewer what track, what level, and what the room will see.
 - A hook, then a plain second half. "Open Source Is Not Exempt: What the CRA Really Asks of Open Source Projects and Vendors." "The Clock Is Already Running: Will the CRA Block Your Product from Shipping to the EU?" The first half earns the click, the second half says what the talk is.
@@ -71,7 +71,7 @@ The title is written last and read first. Patterns from the accepted sample and 
 
 The description is the talk, compressed. Its job is to let the reviewer see the session.
 
-- **Open on the problem or the change**, in the words a practitioner would use. The accepted sample opens on three symptoms. The CRA drafts open on the law and its dates. Both put the stakes in the first two sentences.
+- **Open on the problem or the change**, in the words a practitioner would use. The accepted Cilium proposal opens on three symptoms. The CRA drafts open on the law and its dates. Both put the stakes in the first two sentences.
 - **Establish standing with a fact.** Where the speaker has done this, say so with the specific: clusters, teams, months, users, incidents. One fact beats any adjective.
 - **Say what the session covers, as the speaker.** "In this session we will ..." or "In this talk I'll ...". Name the areas. The detail belongs in the talk.
 - **Promise a shape the reviewer can picture.** Real examples paired with corrections. A walkthrough on a real setup. A test the audience can apply in minutes.
@@ -97,7 +97,7 @@ The proposal reads as written by an experienced speaker in the talk's own field.
 - **Open source or community talk**: a maintainer. Speaks about the project's users and contributors as people they owe something to. Honest about what the project does not do.
 - **Platform or product talk**: an operator who runs it. Numbers about scale and time. The product is one of the tools, never the subject.
 
-Read the user's samples for their own cadence and match it: how long their sentences run, how often they state an opinion, how they refer to their own work.
+Read the user's proposals in `selected/` for their own cadence and match it: how long their sentences run, how often they state an opinion, how they refer to their own work.
 
 ## Part 8: What gives a machine away
 
