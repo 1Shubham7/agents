@@ -33,6 +33,7 @@ With the conference named, research what it accepts. Do this every run, even for
 3. Find the accepted talks from the previous one or two editions: the schedule (often on sched.com or the event site), a "sessions" page, or a published programme. Read at least twenty accepted titles in the track you are targeting, and at least five full abstracts. WebFetch returns a summary; when you need exact wording, pull the page with `curl -sL`.
 4. Write down what you found as patterns, with examples: how long titles are, whether they are statements or questions, whether they carry a colon, how often they name a tool or a number, how abstracts open, whether they are first person, what the accepted talks have in common that the conference's own guidelines do not say. Note what is absent too. A conference whose last programme has no vendor-pitch titles is telling you something.
 5. Save or update `conferences/<conference-slug>.md` with the date, the sources you read, the form limits, and the patterns. Later runs read it.
+6. Check `outcomes.md` for this conference. If the user has sent it something before, the result and the why line outrank anything you infer from the programme.
 
 You are done when you can state the form limits and five concrete patterns from accepted talks, each with an example title.
 
