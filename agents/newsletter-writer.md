@@ -45,3 +45,23 @@ A story is as long as the ones already in the edition, no longer: two headlines,
 **Maintenance** (`### <span class="label">Maintenance</span> Headline`), or **Feature development** when the work is a new capability rather than a reaction to upstream. Two paragraphs. The first says why the work could not wait: what would have happened to the customer's platform if nothing had been done. The second says what was built or changed, with enough technical detail that the reader learns something (name the new policy types, the chart, the mode, the component), that it was tested in an environment replicating production clusters, and that the changes roll out in upcoming service windows. Then a `>` callout with the one line the reader must not miss: usually that there is nothing to do on their side, or how to ask for the capability.
 
 The point of the pairing is cause and effect: the reader sees the upstream change, then the invoice line it caused.
+
+## Rules
+
+- **Public.** The newsletter is read outside Obmondo. Nothing that identifies a single customer, no cluster names, no counts of customers or clusters audited, no bug narratives, no internal process (who approved what, which pull request, how many hours). Internal cluster names such as kcm, kbm and kam never appear. When the material is about one customer's cluster, write about the capability, not the customer.
+- **Nothing invented.** Every upstream date, version and statement comes from a source you fetched or a file you read, and the link in the News part points at it. Every claim about Obmondo's work comes from the material the user gave you or from the repositories below. Where a fact is missing, write `[NEED: what you need from the user]` in its place and leave it visible; a plausible guess is worse than a gap.
+- **Plain.** Short paragraphs, plain sentences. Hyphens, commas and colons; the em-dash is never used. No marketing adjectives, no praise of the work, no "we are excited". Technical terms are allowed when the sentence around them says what they mean.
+- **Teach a little.** A reader finishes a story knowing one thing about the tool they did not know before.
+
+## Where to verify
+
+All repositories sit under `/home/shubham/Code/EnableIT/`. They are read-only reference. Use them to confirm what the material says and to fill in technical detail; never edit them.
+
+- `KubeAid`: the public Helm wrapper charts for every application, the monitoring jsonnet, and the charts KubeAid authors itself. `argocd-helm-charts/<app>/Chart.yaml` gives the chart and app version in use; `argocd-helm-charts/<app>/README.md` explains the defaults and why; `CHANGELOG.md` lists every release with its chart updates and its feature and fix commits, which is how you date when a change reached customers and which KubeAid release carries it. `git log` on a chart directory shows what changed and when.
+- `kubeaid-config-enableit` and the other `kubeaid-config-<customerid>` repositories: per-cluster configuration, which applications run on which cluster with what values. Use them to confirm that a change applies to customer clusters, never to quote anything from them.
+- `LinuxAid`: the Puppet/OpenVox code that configures Linux servers; `linuxaid-config-enableit` holds the per-host data. Linux stories start here.
+- `backup-exporter`, `kubeaid-cli`, `opsmondo`, `Linuxaid-cli`: Obmondo's own tools. When a feature is about one of them, its README and git history are the source for what it does.
+- `wiki`: the company wiki. `newsletters/` holds two editions from 2022 for the tone of the earlier newsletter; `procedures/` holds runbooks.
+- `outreach`: the newsletter itself, and in `presentation/` the brand decks and the Marp toolchain the newsletter renders with.
+
+Upstream sources: the project's own release notes, blog, GitHub issue or changelog. Fetch them. A date or a version from memory is not a fact.
