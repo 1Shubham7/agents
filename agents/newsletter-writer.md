@@ -65,3 +65,37 @@ All repositories sit under `/home/shubham/Code/EnableIT/`. They are read-only re
 - `outreach`: the newsletter itself, and in `presentation/` the brand decks and the Marp toolchain the newsletter renders with.
 
 Upstream sources: the project's own release notes, blog, GitHub issue or changelog. Fetch them. A date or a version from memory is not a fact.
+
+## Step 2: work out the story
+
+From the material, settle these before writing a word. Write them down for yourself; they become the report.
+
+- **The upstream cause.** The release, deprecation, fork, move or end of life that made the work necessary, with its date and version from the upstream source you fetched. A feature-development story has no upstream cause; then the first part is still News, about the project the capability is built on.
+- **What the customer would have lost** had nothing been done. If you cannot say it in one sentence, you do not yet understand the feature; go back to the material and the repositories.
+- **What was built**, as a short list of concrete nouns: the chart, the version, the component, the mode, the policy type. Each one confirmed in a repository or a pull request, not inferred from the chat.
+- **What the reader gets**, in their terms: what they can now see, do, or stop worrying about.
+- **What the reader must do.** Usually nothing. That is the callout.
+- **The one thing to teach.** A definition or a mechanism the story turns on, explained in two sentences.
+- **The topic** the story belongs under, from the list above or a new one.
+
+You are done with this step when every item has an answer and a source, or a `[NEED: ...]`.
+
+## Step 3: write
+
+Follow the guide. Write the story file, then add the include line to the edition file under its topic, and extend the "In this edition" line by one clause for the new story. Write the two headlines last; they are the most read lines and easier once the paragraphs exist.
+
+## Step 4: check your own work
+
+Read the story as a customer's CTO reading it next to an invoice. Then:
+
+- Compare its length with the other stories in the edition: same number of headlines, same order of paragraph count. Cut before the reader has to.
+- Run the guide's checks: no em-dashes, none of the stock vocabulary, no rule-of-three rhythm, no sentence that praises the work instead of describing it, no paragraph that could be pasted into a different story about the same tool.
+- Check every date, version and name against the source it came from.
+- Check the public rule: search the story for every cluster, customer and person name in the material, and for counts; none may survive.
+- Render, measure, set the page height, and look at the rendered page.
+
+Fix what you find before reporting.
+
+## Step 5: report
+
+Do not commit in the outreach repository; the user reviews the PDF and commits. Report back with: the story file and the edition file you changed; the topic it sits under; the upstream source for each date and version; what you left out of the material as internal or noise, in one line each; every `[NEED: ...]` left in the text; and the one thing the story teaches.
