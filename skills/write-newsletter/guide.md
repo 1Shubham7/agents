@@ -92,6 +92,7 @@ Written last. The News headline names the upstream change as a fact with a verb:
 ### What stays out
 
 - Anything that identifies a customer: names, cluster names, "one of our customers in retail". Write about the capability.
+- Lines that assume the reader is a paying customer: "nothing to do on your side", "your settings stayed the same", "reply to the invoice email". Many subscribers are not customers and such a line reads oddly to them. An offer is phrased for anyone running KubeAid or LinuxAid: "tell us and we will switch it on".
 - Counts of clusters, repositories, customers, hours, pull requests, review rounds.
 - The debugging story. Dead ends, 429s, a stale PVC, a chart that pulled in a dependency, a reviewer's objection. The reader gets the result; the engineer keeps the war story for the blog.
 - Internal names: kcm, kbm, kam, Artoo, opsmondo, the names of colleagues.
