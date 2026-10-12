@@ -51,3 +51,56 @@ Gareth Rushgrove's weekly list of links, run for over a decade.
 ### The Obmondo stories already published
 
 Read every story in the current edition before writing. They are the house examples of the shape: definition, change, link; why it could not wait, what was built, callout. Match their paragraph count and their register. The 2022 editions in `wiki/newsletters/` show the earlier voice: lists of improvements with a reason attached to each, no hype, open source contributions named with their pull request.
+
+## Part 2: how to write the story
+
+### The reader
+
+A CTO or an infrastructure lead at a customer, reading next to the invoice, or a subscriber who runs their own clusters and wants to know what changed upstream this month. Technical, busy, allergic to being sold to. They know what Kubernetes is; they may not know what Kyverno or Loki is. Every story is written for the second case and read by the first without annoyance.
+
+### Opening a story
+
+The first paragraph of the News part defines the project. Not its history, not its popularity: what it is and what it does in the cluster or on the server, in words a reader can repeat. Then one mechanism the story will turn on, in a sentence. The Loki story opens with "it does not index the text of every log line; it indexes a small set of labels", because the cost and the Grafana integration both follow from that. Find the one mechanism and put it first.
+
+The change comes in the second paragraph, with its date and version, attributed: "Kyverno 1.19 was released on 20 August 2026". Deprecations and moves are stated as what they are, in the project's own words where possible. Then the link, alone on its line, as `[Read the <thing> →](url)`, naming what is behind it.
+
+### Cause and effect
+
+The Maintenance part opens with what would have happened to the reader's platform had nothing been done, in one or two sentences, stated as a fact about the software, not as a fear: "All of them would have stopped working at the next Kyverno upgrade." That sentence is why the invoice line exists; the reader must find it without searching.
+
+The second paragraph says what was built, in nouns. Name the chart, the version, the component, the mode, the policy type. Say what each named thing does in a clause, so the paragraph teaches while it reports: "`GeneratingPolicy`: a new namespace triggers the creation of its secret, quota and limit range." Then that it was tested in an environment replicating production clusters, and that rollout happens in upcoming service windows. Those two sentences are the same in every story and belong at the end of the paragraph, not the start.
+
+The callout is one or two sentences, the thing the reader must not miss. It is almost always "nothing to do on your side", with what stayed the same, or how to ask for the capability. It is never a summary of the story.
+
+### Sentences
+
+- Short paragraphs, three to five sentences. One idea per paragraph.
+- Vary sentence length. A short sentence after a long one lands the point.
+- Name the actor. "We rewrote every policy", "Grafana marked the chart deprecated". Passive voice hides who did what, and the whole point is who did what.
+- Specifics over adjectives. A version number, a date, a count of policy types, a retention period. If a sentence has no specific and makes no claim, cut it.
+- Technical terms are fine when the sentence says what they mean the first time. Code formatting for identifiers (`loki-stack`, `MutatingPolicy`), not for concepts.
+- Hyphens, commas and colons for punctuation. No em-dashes, no `--`, no semicolon chains.
+- No "we are excited", "robust", "seamless", "leverage", "cutting-edge", "best-in-class", "empower", "journey", "delve", "landscape", "game-changer", "ensure" as a verb of promise. No exclamation marks.
+- No rule of three for its own sake: three adjectives, three examples, three clauses. Use the number of things there are.
+- No rhetorical questions in a story. The deck of a Platformer piece can ask; an invoice explanation answers.
+- No praise of the work. Describe it; the reader judges.
+
+### Headlines
+
+Written last. The News headline names the upstream change as a fact with a verb: "Kyverno 1.19 retires the old policy format", "Loki's old Helm chart is retired, and the chart itself has moved". The Maintenance headline names what Obmondo did and the deadline or reason in the same breath: "Every policy rewritten before the old format disappears", "Central logging in KubeAid rebuilt on the community chart". Six to twelve words, no colon, no question, no pun.
+
+### What stays out
+
+- Anything that identifies a customer: names, cluster names, "one of our customers in retail". Write about the capability.
+- Counts of clusters, repositories, customers, hours, pull requests, review rounds.
+- The debugging story. Dead ends, 429s, a stale PVC, a chart that pulled in a dependency, a reviewer's objection. The reader gets the result; the engineer keeps the war story for the blog.
+- Internal names: kcm, kbm, kam, Artoo, opsmondo, the names of colleagues.
+- The future tense about things not yet decided. "Will be rolled out in upcoming service windows" is a plan the user has confirmed; anything beyond it is a `[NEED: ...]`.
+
+### The substitution test
+
+Read each paragraph and ask whether it could be pasted into a different story about the same tool, or a story about a different tool, without changing a word. If it could, it says nothing about this feature. Replace it with the specific that makes it ours, or cut it.
+
+### Length
+
+A story is the length of the stories already in the edition: two headlines, four to six paragraphs, one callout, roughly 350 to 500 words. The five newsletters above run from one sentence per item to five thousand words per issue; none of that transfers. The reader is reading an invoice explanation, and it ends when the explanation does.
