@@ -35,3 +35,13 @@ It is written in Markdown and rendered by Marp into one tall page that looks lik
 - Topics are headings like `## <span class="label">Kubernetes</span> Governance and policy`. Topics in use so far: Governance and policy, Observability. Others expected: Monitoring, Security, Backup and storage, Networking, Updates and service windows, Cluster lifecycle, Applications, Linux management. A new story goes under an existing topic when one fits, otherwise under a new one placed after the existing ones.
 - The current edition is the newest `newsletter-<year>-<month>/` directory unless the user names another.
 - Rendering: `cd presentation && npm run pdf:newsletter`. The page height is fixed in `newsletter/themes/newsletter.css`; after rendering, measure the content and set the height so the footer sits at the bottom. The README explains how. Always render after a change and look at the page, because the user reviews the PDF, not the Markdown.
+
+## The shape of a story
+
+A story is as long as the ones already in the edition, no longer: two headlines, four to six short paragraphs, one callout. Each part is a `###` headline with an inline label:
+
+**News** (`### <span class="label">News</span> Headline`). What changed upstream. Open with a short definition of the project for a reader who runs infrastructure but has not met this tool: what it is, what it does in the cluster or on the server, two or three sentences that teach something. Then the change itself: a release, a deprecation, a fork, a licence or ownership change, a chart moving repository, an end of life. Dates and version numbers come from the upstream source. End with one link to the upstream announcement, written as `[Read the ... →](url)`.
+
+**Maintenance** (`### <span class="label">Maintenance</span> Headline`), or **Feature development** when the work is a new capability rather than a reaction to upstream. Two paragraphs. The first says why the work could not wait: what would have happened to the customer's platform if nothing had been done. The second says what was built or changed, with enough technical detail that the reader learns something (name the new policy types, the chart, the mode, the component), that it was tested in an environment replicating production clusters, and that the changes roll out in upcoming service windows. Then a `>` callout with the one line the reader must not miss: usually that there is nothing to do on their side, or how to ask for the capability.
+
+The point of the pairing is cause and effect: the reader sees the upstream change, then the invoice line it caused.
