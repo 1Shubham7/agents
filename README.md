@@ -65,6 +65,20 @@ Drafts go to `drafts/<conference>/<talk>.md` inside the cfps repo, one commit ea
 
 Usage: `/write-cfp <talk idea> for <conference>`, or just "write a CFP for X". Have the conference name, the idea, who is speaking, and any real numbers or incidents you want in it. The skill looks for the cfps repo at `./cfps`, then `~/Code/Personal/agents/cfps`, and asks where it is otherwise. When the result comes in, move the file and add a line to `outcomes.md` saying what happened and why; that is how the agent gets better.
 
+### newsletter-writer (and the write-newsletter skill)
+
+Writes one story at a time for the Obmondo customer newsletter: the monthly PDF, sent to subscribers with the invoice, that explains what changed upstream in the open source projects a customer's platform runs on and what Obmondo did about it. The newsletter exists because a customer once questioned maintenance work on an invoice that nobody had explained; every story answers that question before it is asked.
+
+You name the feature (the unit of work in the Obmondo portal) and hand over the raw material: the Mattermost thread where the engineer braindumped while working, the time registration comments from the Gitea issue, any notes, the pull request links. The agent reads all of it, keeps what says what was built and why, drops the noise, and verifies every technical claim against the repositories on disk: `KubeAid` for chart versions, READMEs and the CHANGELOG that dates when a change reached customers; the `kubeaid-config-*` repositories to confirm a change applies to customer clusters; `LinuxAid` for the server side; Obmondo's own tools for features about them. Upstream dates and versions come from the project's own release notes or issue tracker, fetched on every run.
+
+The story has a fixed shape, learned from the stories already in the edition: News (what the project is, in two sentences that teach something; what changed upstream, with date and version; one link) and Maintenance or Feature development (what the customer would have lost had nothing been done; what was built, in nouns; tested in an environment replicating production, rolled out in service windows; a callout saying what the reader must do, usually nothing). It is public, so customer names, cluster names, counts and debugging stories never appear.
+
+`skills/write-newsletter/guide.md` is the writing style. It distils what five newsletters engineers actually open do well, one trait each: the IPE newsletter's background-before-news and its separation of fact from opinion, the Pragmatic Engineer's cause-and-effect chains grounded in specifics, Platformer's headline-states-the-news and deck-states-the-tension, Bytes' one-sentence news items with the verdict last, DevOps Weekly's blurbs that describe a resource without selling it. Their length and sections do not transfer; the Obmondo story keeps its own size, which is the size of the stories already published.
+
+The agent writes the story file, adds it to the edition under its topic, extends the "In this edition" line, renders the PDF and sets the page height, and reports: sources for every date and version, what it left out as internal, every `[NEED: ...]` it could not fill. It commits nothing; you read the PDF and commit.
+
+Usage: `/write-newsletter <feature title>` with the material pasted, or "write the newsletter story for X". The skill looks for the outreach repo at `~/Code/EnableIT/outreach` and asks otherwise.
+
 ### teacher
 
 Teaches you concepts, tools, and code properly, assuming no prior knowledge. Builds explanations from the ground up (what the thing is, what problem it solves, how it works, then the details), uses concrete examples for anything abstract, and draws ASCII or Mermaid diagrams for anything with structure or flow.
@@ -90,6 +104,6 @@ Then reload if prompted:
 /reload-plugins
 ```
 
-All agents install together as one plugin. Check `/context` under Custom Agents, or just ask for a standup, an article, a story, or a lesson, to confirm they loaded.
+All agents install together as one plugin. Check `/context` under Custom Agents, or just ask for a standup, an article, a story, a newsletter story, or a lesson, to confirm they loaded.
 
-To register the agents and skills locally without going through the plugin, copy `agents/*.md` into `~/.claude/agents/` and symlink `skills/write-article` and `skills/tell-story` into `~/.claude/skills/`.
+To register the agents and skills locally without going through the plugin, copy `agents/*.md` into `~/.claude/agents/` and symlink `skills/write-article`, `skills/tell-story`, `skills/write-cfp` and `skills/write-newsletter` into `~/.claude/skills/`.
