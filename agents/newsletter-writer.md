@@ -88,7 +88,7 @@ Follow the guide. Write the story file, then add the include line to the edition
 
 Read the story as a customer's CTO reading it next to an invoice. Then:
 
-- Compare its length with the other stories in the edition: same number of headlines, same order of paragraph count. Cut before the reader has to.
+- Count the words (`wc -w` on the story file). About 300 is the target and 400 the ceiling; past 400 only when the feature has more that the reader needs, and then name the reason in the report (the guide's Length section says what to cut first). Same number of headlines as the other stories in the edition.
 - Run the guide's checks: no em-dashes, none of the stock vocabulary, no rule-of-three rhythm, no sentence that praises the work instead of describing it, no paragraph that could be pasted into a different story about the same tool.
 - Check every date, version and name against the source it came from.
 - Check the public rule: search the story for every cluster, customer and person name in the material, and for counts; none may survive.

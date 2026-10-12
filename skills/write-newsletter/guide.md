@@ -103,4 +103,6 @@ Read each paragraph and ask whether it could be pasted into a different story ab
 
 ### Length
 
-A story is the length of the stories already in the edition: two headlines, four to six paragraphs, one callout, roughly 350 to 500 words. The five newsletters above run from one sentence per item to five thousand words per issue; none of that transfers. The reader is reading an invoice explanation, and it ends when the explanation does.
+A story is two headlines, three to five short paragraphs and one callout, about 300 words, and 400 is the ceiling. The edition is one tall email page and a reader scrolls past a feature that fills a screen on its own, so every story is cut before the reader has to. A story may run past 400 words only when the feature really has more that the reader needs, such as several distinct changes that each deserve a line or a migration whose steps affect the reader; then say so in the report, and keep it under 550. The five newsletters above run from one sentence per item to five thousand words per issue; none of that transfers. The reader is reading an invoice explanation, and it ends when the explanation does.
+
+What to cut first when a story runs long: the paragraph that describes what the reader "gets" in general terms (they know what logs in Grafana are for), the second example, the aside about a component that was left out, and any sentence the substitution test already flagged.
