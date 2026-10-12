@@ -37,7 +37,7 @@ Casey Newton's reporting on platforms and AI. Mostly paywalled; the headlines an
 A JavaScript newsletter that is funny on purpose.
 
 - **One news item is one or two sentences.** "Vue Router is working on experimental scroll restoration. Better late than never." The name of the project, what changed, and at most one clause of context. When Obmondo adds a one-line item (a chart update, a small fix), this is its length.
-- **The news first, the verdict last.** "Artem Zakharchenko released MSW v3, which is now pure ESM" and then the aside. Ours ends with the callout instead of a joke.
+- **The news first, the verdict last.** "Artem Zakharchenko released MSW v3, which is now pure ESM" and then the aside. Ours ends with the last fact, or with a callout when there is a note to give.
 - **The joke is dry and short.** Obmondo does not joke, but the lesson transfers: the aside after a fact is one clause, never a paragraph.
 
 ### DevOps Weekly (devopsweeklyarchive.com)
@@ -50,7 +50,7 @@ Gareth Rushgrove's weekly list of links, run for over a decade.
 
 ### The Obmondo stories already published
 
-Read every story in the current edition before writing. They are the house examples of the shape: definition, change, link; why it could not wait, what was built, callout. Match their paragraph count and their register. The 2022 editions in `wiki/newsletters/` show the earlier voice: lists of improvements with a reason attached to each, no hype, open source contributions named with their pull request.
+Read every story in the current edition before writing. They are the house examples of the shape: definition, change, link; why it could not wait, what was built. Match their paragraph count and their register. The 2022 editions in `wiki/newsletters/` show the earlier voice: lists of improvements with a reason attached to each, no hype, open source contributions named with their pull request.
 
 ## Part 2: how to write the story
 
@@ -70,7 +70,7 @@ The Maintenance part opens with what would have happened to the reader's platfor
 
 The second paragraph says what was built, in nouns. Name the chart, the version, the component, the mode, the policy type. Say what each named thing does in a clause, so the paragraph teaches while it reports: "`GeneratingPolicy`: a new namespace triggers the creation of its secret, quota and limit range." Then that it was tested in an environment replicating production clusters, and that rollout happens in upcoming service windows. Those two sentences are the same in every story and belong at the end of the paragraph, not the start.
 
-The callout is one or two sentences, the thing the reader must not miss. It is almost always "nothing to do on your side", with what stayed the same, or how to ask for the capability. It is never a summary of the story.
+A story has no callout by default. The `>` box is added only when there is a note the reader must not miss and that the paragraphs do not already carry: an action on their side, a date by which something changes for them, or a setting they may want to ask for. "Nothing to do on your side" is not a note; when nothing is asked of the reader, the story ends on its last fact. A callout is one or two sentences and never a summary of the story.
 
 ### Sentences
 
@@ -103,6 +103,6 @@ Read each paragraph and ask whether it could be pasted into a different story ab
 
 ### Length
 
-A story is two headlines, three to five short paragraphs and one callout, about 300 words, and 400 is the ceiling. The edition is one tall email page and a reader scrolls past a feature that fills a screen on its own, so every story is cut before the reader has to. A story may run past 400 words only when the feature really has more that the reader needs, such as several distinct changes that each deserve a line or a migration whose steps affect the reader; then say so in the report, and keep it under 550. The five newsletters above run from one sentence per item to five thousand words per issue; none of that transfers. The reader is reading an invoice explanation, and it ends when the explanation does.
+A story is two headlines and three to five short paragraphs, about 300 words, and 400 is the ceiling. The edition is one tall email page and a reader scrolls past a feature that fills a screen on its own, so every story is cut before the reader has to. A story may run past 400 words only when the feature really has more that the reader needs, such as several distinct changes that each deserve a line or a migration whose steps affect the reader; then say so in the report, and keep it under 550. The five newsletters above run from one sentence per item to five thousand words per issue; none of that transfers. The reader is reading an invoice explanation, and it ends when the explanation does.
 
 What to cut first when a story runs long: the paragraph that describes what the reader "gets" in general terms (they know what logs in Grafana are for), the second example, the aside about a component that was left out, and any sentence the substitution test already flagged.
