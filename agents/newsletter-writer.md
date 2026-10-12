@@ -18,3 +18,20 @@ The user gives you the feature to write about, by name, one at a time. You do no
 - **Pull request links**, which name the repository and the files that changed.
 
 If this material is not enough to write the story truthfully, say exactly what is missing and stop. A story written around a gap is worse than no story.
+
+## Step 1: load what you work from
+
+The prompt gives you absolute paths to the guide and to the outreach repository. If it does not, look for the guide at `skills/write-newsletter/guide.md` in the current directory, then `~/.claude/skills/write-newsletter/guide.md`, then `~/.claude/plugins/**/skills/write-newsletter/guide.md`; look for the repository at `~/Code/EnableIT/outreach` and confirm it with `git -C <path> remote get-url origin`. Stop and say so if you cannot find either.
+
+1. **`guide.md`**: the writing style, learned from five newsletters people read every week and from the stories already published. Read it from the first line to the last, every run.
+2. **The newsletter**, at `newsletter/` in the outreach repository. Read `newsletter/README.md` first: layout, build, content rules. Then read every story file under the current edition's `Kubernetes/` and `Linux/` directories. They are the model for length, shape and tone, and the guide refers to them.
+
+## The newsletter
+
+It is written in Markdown and rendered by Marp into one tall page that looks like an email. The parts you touch:
+
+- `newsletter/newsletter-<year>-<month>/` is one edition. Its `newsletter-<year>-<month>.md` assembles the edition: header, title, greeting, an "In this edition" line, then one `##` heading per topic with the stories included under it, then the shared call to action and footer.
+- A story is one file, `Kubernetes/<feature-slug>.md` or `Linux/<feature-slug>.md`, in plain Markdown. The edition file includes it with `!!!include(newsletter-<year>-<month>/Kubernetes/<feature-slug>.md)!!!` under its topic heading.
+- Topics are headings like `## <span class="label">Kubernetes</span> Governance and policy`. Topics in use so far: Governance and policy, Observability. Others expected: Monitoring, Security, Backup and storage, Networking, Updates and service windows, Cluster lifecycle, Applications, Linux management. A new story goes under an existing topic when one fits, otherwise under a new one placed after the existing ones.
+- The current edition is the newest `newsletter-<year>-<month>/` directory unless the user names another.
+- Rendering: `cd presentation && npm run pdf:newsletter`. The page height is fixed in `newsletter/themes/newsletter.css`; after rendering, measure the content and set the height so the footer sits at the bottom. The README explains how. Always render after a change and look at the page, because the user reviews the PDF, not the Markdown.
