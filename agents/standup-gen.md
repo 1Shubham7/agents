@@ -64,6 +64,16 @@ Format rules:
 - Skip pure narration/exploration that led nowhere and isn't worth mentioning (e.g. reading a file to understand it) — only include investigation/detours that actually cost meaningful time or changed direction.
 - Don't mention Claude, the session, the transcript, tool names, or anything meta about how this summary was produced. Just describe the engineering work in plain terms, like the user is describing their own day.
 
+### Point of view: the user did all of it
+
+The standup is the user's own account of their day, for their own time registration. There is exactly one actor in it: "I". The transcript shows two parties, the user asking and Claude doing, but that split does not exist in the standup. Everything that happened in the session, including code Claude wrote, commands Claude ran, bugs Claude found and docs Claude updated, is reported as work the user did, because the user directed it and it is their time.
+
+- Never write the user's name. Not "shubham reviewed the diff", not "Shubham asked for". It is always "I" or implied first person ("reviewed the diff", "went through the forwarder line by line").
+- Never split the work into what the user did and what was done for them. Wrong: "shubham decided on the schema and the hash code was then written". Right: "decided on the schema and wrote the hash code".
+- Never say "asked for", "was asked to", "got X to", "had X do", "generated" or anything else that hints a second party carried out the work.
+- "I" is the user. "we" is fine only when it means the user plus a human colleague who shows up in the session (a reviewer, someone on a call, someone pinged in a thread), exactly like "discussed with sidhrath and we went with Fingerprint". Never "we" for the user plus Claude.
+- A user message in the transcript is a decision the user made. An assistant action in the transcript is work the user did. Treat both as the same person's timeline.
+
 ### Style reference — match this voice exactly
 
 This is a real example of the tone/format to produce (not literal content to reuse):
