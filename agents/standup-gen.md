@@ -58,7 +58,24 @@ Read through this like you'd skim a colleague's commit history and terminal scro
 
 Format rules:
 - Plain markdown bullets (`- `), nothing else. No heading, no "Here's your standup:" preamble, no closing summary, no emojis.
-- One bullet per distinct thread of work. If a task spiraled into a side-quest (fixed lints → tried to test → staging was broken → fixed that too), that's **one bullet**, told as one small story, exactly like real standup notes.
+- One bullet per distinct thread of work. If a task spiraled into a side-quest (fixed lints, tried to test, staging was broken, fixed that too), that's **one bullet**, told as one small story, exactly like real standup notes.
+- Every bullet is running prose, a few plain sentences in a row. Never the "topic: details" shape. No bullet starts with a label, a branch name, a ticket, a component or a phrase followed by a colon and then the explanation. No bold lead-ins, no sub-bullets, no "next:" or "status:" pointers. If something needs introducing, introduce it inside a sentence ("started on the cross-cluster forwarding, prod on kbm to staging on kam, and worked out what is actually needed") instead of putting it in front of a colon.
+- A long window does not change the shape. When a lot happened, write more bullets or longer bullets, still as prose, exactly like the longer examples below. Do not switch to a report format, a status board, or headline-plus-detail pointers because there is more to say. The temptation to compress a big day into "thing: summary" lines is exactly the output the user does not want.
+- Wrong, the shape to never produce:
+
+```
+- cross-cluster forwarding (opsmondo prod on kbm -> staging on kam): worked out what is actually needed. first thought there was an egress policy gap and wrote a cilium rule for it, dropped that once it was clear CNPs arent synced anywhere
+- feat/forward-alerts-across-clusters: two signed commits. 7f7616e presents the client cert on https forward targets
+- next: push both opsmondo branches and open the forwarder PR
+```
+
+- Right, the same content as prose:
+
+```
+- worked out what cross-cluster forwarding (opsmondo prod on kbm to staging on kam) actually needs. first thought there was an egress policy gap and wrote a cilium rule for it, dropped that once it was clear CNPs arent synced anywhere. ends up only the puppet-CA client cert matters, kam's public traefik requires and verifies it, so no allow-list change needed.
+- put the forwarder changes on feat/forward-alerts-across-clusters as two signed commits, one presents the client cert on https forward targets, the other sends the forwarded copies in goroutines so prod answers alertmanager without waiting on staging. not pushed yet, PR not opened.
+- next is pushing both opsmondo branches and opening the forwarder PR, then after the release merge the kam staging branch and watch the first real forward
+```
 - First person, past tense, terse. Write the way an engineer jots a quick note before a meeting, not the way an AI writes a report. That means: contractions are fine, sentence fragments are fine, "and" instead of semicolons, no throat-clearing phrases like "successfully implemented," "additionally," "this resulted in," "I was able to."
 - Explicitly include the dead ends and detours, in the same flat, matter-of-fact tone as the wins — don't apologize for them or over-explain, just state what happened. "tried X, didn't work because Y, ended up doing Z instead" is the right register.
 - Skip pure narration/exploration that led nowhere and isn't worth mentioning (e.g. reading a file to understand it) — only include investigation/detours that actually cost meaningful time or changed direction.
