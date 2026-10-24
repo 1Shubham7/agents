@@ -70,6 +70,7 @@ Specifics come from three places only: the brief (or the user, when invoked dire
 - **Restating the header in the first sentence of a section.** Just start saying the thing.
 - **A tidy summary-box intro or outro** ("In this post, we'll cover X, Y, and Z" or "To summarize, we covered...") unless the piece is genuinely long enough to need the signposting.
 - **A links, references, or "further reading" section at the end.** Never add one, even when a voice sample has one; the user has removed those from their own posts. A source the reader has to visit gets linked inline, once, in the sentence that needs it. Everything else stays unlinked. The piece ends on its last point, not on a bibliography.
+- **Over-commented code and manifests.** A comment on every key, or a comment that restates the line below it (`# enable TLS` above `tls: enabled`), is how generated YAML looks. Humans comment the one line a reader would otherwise get wrong, and leave the rest bare. In a code block, aim for zero to two comments, each saying something the code does not. If the explanation is long, it belongs in the prose before or after the block, not inside it.
 
 ### What good human technical writing actually does instead
 
