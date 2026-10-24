@@ -105,6 +105,63 @@ This is a real example of the tone/format to produce (not literal content to reu
 
 Notice: lowercase-ish and a little loose grammatically, short, no fluff, dead ends folded into the same sentence as the fix, function/variable names mentioned when relevant, no bullet is padded out to sound more impressive than it was.
 
+More real examples, these from longer days. Same voice, just more of it. These are the shape to copy when the window is big:
+
+```
+- started work on double-ticket problem (qd2xcggwag#5703 vs #5696) - read the old ticket on this and the old PR on this - a lot has changed since then so not very helpfull. read the design doc that was created for this and then brainstromed how to fix it, and created a new design doc.
+
+- then worked on code changes created a new utils/helpers/alert_hash.go with a fixed inclusion schema per product (alertname+certname required, linuxaid and kubeaid lists), hash is now model.LabelSet.Fingerprint. removed the old MD5 and the labels_not_relevant_for_alert_hashes config key
+
+- the problem it would cause is that new duplicate tickets will come since hash would change, brainstromed how we can fix that but then that would need deleting keys from redis which is not a good idea so removed that.
+
+- looked at making the relevant-label lists configurable from helm values instead of a rebuild. but then I thought anyone can chage that and that will cause probmes, so that should be under tests. have pinged sidhrath for his views on this.
+```
+
+```
+- Added alertname+certname as required labels - discussed if there would be any other required labels - idt, then removed severity from relevant labels - thought about it as well - alerts fire as warning/critical pairs under one name so keeping it relevant would make them 2 tickets. then discussed with sidhrath and used model.LabelSet.Fingerprint instead of ComputeMD5Hash. updated design doc as well.
+
+- got the list of all the labels that are there in kubeaid and linuxaid to have a proper list since this time we need to know all the labels and decide which is relevant. added those to constants/labels.go
+
+- was on meet sidhrath where we discussed a few more improvements we could add in this PR itself. like using alertmanger sdk types.Alert but that was depricated, and then alert.Alert that also doesnt have fingerprint field so we are using template.Alert now. also we have AlertLabels.AlertHash we wanted to remove - investigated that but then it's the only way the hash reaches the issue body template and on the dedup-hit path it has to be the issue's hash not the context one - we didnt remove it
+
+- removed the dead FilterAlertLabels + tests code. added code to return erorr for unknown product instead of falling back to a common schema, the WatchdogAlertMissing alert carries product=kubeaid, test fixtures got product labels.
+
+- instead of hardcoded label lists we are now taking it from configmap, updated unit tests for that. also have sent a lsit of changes this will cause to the thread.
+
+- fixed lint and tests and send to review, yet to test on staging.
+```
+
+```
+- saw a problem that we are reutrning errror when product type is not kubeaid or linuxaid but for watchdog alert - it was not present, had a discussion with sidhrath on this, he said he added that - actually it was there in one alert but not in another WatchdogAlertMissingFromClientPrometheus alert - added that.
+
+- re-checked the old vs new ignored label lists - alert_id and customer_id were always hashed before and are now dropped - thuoght abut that and didnt change that. added cluster_certname, exported_service, hostname to relevant labels after some brainstroming
+```
+
+```
+- I didnt have access to monitoring-staging or port-forward in monitoring and also no argocd sync access - made PRs to get that.
+
+- investigated "failed to list refs: authentication required" error - after a few things realized that argocd doesnt have opsmondo repo token. so it cant access helm chart in opsmondo. later on sidhrath added that.
+
+- since opsmondo staging had lot of problems I started setting up local setup for testing, even that faied because I cant pull obmondo harbor images, got that fixed by sidahrth and made the code changes to add differnt types of alerts to test all the usecases I wanted to test.
+
+- then fixed gitea staging and it didnt have any tokens - so added a pat there and gave command to sidharth to seal a secret with gitea pat to opsmondo staging.
+
+- adde changes for prod opsmondo to forward alerts to staging, and that goes over kam's public traefik which needs a client cert - added changes for that in a separate branch (client cert on https forward targets), and fixed the forward URL in both the chart default and kbm values
+
+- no access to monitoring-staging so moved it to monitoring but later i realized I could also sync the netbird and get access so did that. postgres and redis pods Pending because the migrated values still said zfs-localpv and on kam that's node-local, switched to rook-ceph-block
+
+- then finally things were up but opsmondo pod failed - investigated that permitted_cidrs only had 172.20.0.0/16 instead of kam's pod cidr 10.244.0.0/16, every kubelet probe was getting 403 - fixed. added the secret for opsmondo tokens and opsmondo was up.
+```
+
+What these longer ones have in common, and what to reproduce:
+
+- Each bullet is a few sentences that follow one thread in the order it happened, with the reasoning inline ("thought about it as well - alerts fire as warning/critical pairs under one name so keeping it relevant would make them 2 tickets"). The why sits next to the what, in the same sentence.
+- Colleagues appear by name and as humans in the story ("pinged sidhrath", "he said he added that", "gave command to sidharth"). The user is always "I" or implied.
+- Blockers and access problems get the same flat treatment as code ("didnt have access ... made PRs to get that").
+- Hyphens and commas join clauses. The only colons are in things like `product=kubeaid` or an error string, never a label in front of a bullet.
+- Open items are stated as plain fact at the end of a bullet ("yet to test on staging", "not pushed yet"), not as a separate "next steps" section.
+- The typos are the user's own. Don't manufacture typos, but don't polish the grammar into something that reads edited either. Loose is correct.
+
 ## Step 5 — edge cases
 
 - If there's genuinely nothing new since the last standup, say so in one short plain line (e.g. "nothing new since last standup") instead of padding out filler bullets.
