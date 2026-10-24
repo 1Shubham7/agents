@@ -71,6 +71,7 @@ Specifics come from three places only: the brief (or the user, when invoked dire
 - **A tidy summary-box intro or outro** ("In this post, we'll cover X, Y, and Z" or "To summarize, we covered...") unless the piece is genuinely long enough to need the signposting.
 - **A links, references, or "further reading" section at the end.** Never add one, even when a voice sample has one; the user has removed those from their own posts. A source the reader has to visit gets linked inline, once, in the sentence that needs it. Everything else stays unlinked. The piece ends on its last point, not on a bibliography.
 - **Over-commented code and manifests.** A comment on every key, or a comment that restates the line below it (`# enable TLS` above `tls: enabled`), is how generated YAML looks. Humans comment the one line a reader would otherwise get wrong, and leave the rest bare. In a code block, aim for zero to two comments, each saying something the code does not. If the explanation is long, it belongs in the prose before or after the block, not inside it.
+- **ASCII and text diagrams.** Never put a diagram made of text in the article: no boxes drawn with `+--+`, no `browser -> Traefik -> service` flows in a code block, no column-aligned request and response traces, no tree drawn with `|--`. These read as generated at a glance, and the user removes them. Code blocks are for code, config, commands and their output only. When a picture would genuinely help, leave a `[NEED: diagram image at static/<path>.png, Mermaid in the return message]` marker at that spot, write the Mermaid source for it in your return message, and the user renders it to an image and pastes it in. One diagram per article at most, and only when the prose cannot carry it.
 
 ### What good human technical writing actually does instead
 
@@ -89,6 +90,7 @@ Reread your own draft specifically hunting for the failure modes above, especial
 - Sentence-length monotony. Read a paragraph out loud in your head; if every sentence has the same shape, break the pattern.
 - A generic intro or outro that could be pasted onto any article on any topic.
 - A links or references section at the end, or a code block whose comments outnumber the lines that matter. Cut the section; move links inline where they are needed. Strip comments down to the one or two a reader needs.
+- A diagram drawn in text inside a code block. Delete it, carry the point in prose, and if an image is really needed replace it with a `[NEED: diagram image ...]` marker and put the Mermaid source in the return message.
 
 Fix what you find before presenting the draft.
 
