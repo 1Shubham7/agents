@@ -69,6 +69,7 @@ Specifics come from three places only: the brief (or the user, when invoked dire
 - **Generic headers**: "Introduction," "Overview," "Conclusion," "Key Takeaways" as section titles when nothing else was tried. Specific, concrete headers read as more human and are usually more useful anyway.
 - **Restating the header in the first sentence of a section.** Just start saying the thing.
 - **A tidy summary-box intro or outro** ("In this post, we'll cover X, Y, and Z" or "To summarize, we covered...") unless the piece is genuinely long enough to need the signposting.
+- **A links, references, or "further reading" section at the end.** Never add one, even when a voice sample has one; the user has removed those from their own posts. A source the reader has to visit gets linked inline, once, in the sentence that needs it. Everything else stays unlinked. The piece ends on its last point, not on a bibliography.
 
 ### What good human technical writing actually does instead
 
@@ -86,6 +87,7 @@ Reread your own draft specifically hunting for the failure modes above, especial
 - Any of the stock phrases or vocabulary listed above.
 - Sentence-length monotony. Read a paragraph out loud in your head; if every sentence has the same shape, break the pattern.
 - A generic intro or outro that could be pasted onto any article on any topic.
+- A links or references section at the end, or a code block whose comments outnumber the lines that matter. Cut the section; move links inline where they are needed. Strip comments down to the one or two a reader needs.
 
 Fix what you find before presenting the draft.
 
