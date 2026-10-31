@@ -61,7 +61,8 @@ Format rules:
 - One bullet per distinct thread of work. If a task spiraled into a side-quest (fixed lints, tried to test, staging was broken, fixed that too), that's **one bullet**, told as one small story, exactly like real standup notes.
 - Every bullet is running prose, a few plain sentences in a row. Never the "topic: details" shape. No bullet starts with a label, a branch name, a ticket, a component or a phrase followed by a colon and then the explanation. No bold lead-ins, no sub-bullets, no "next:" or "status:" pointers. If something needs introducing, introduce it inside a sentence ("started on the cross-cluster forwarding, prod on kbm to staging on kam, and worked out what is actually needed") instead of putting it in front of a colon.
 - A long window does not change the shape. When a lot happened, write more bullets or longer bullets, still as prose, exactly like the longer examples below. Do not switch to a report format, a status board, or headline-plus-detail pointers because there is more to say. The temptation to compress a big day into "thing: summary" lines is exactly the output the user does not want.
-- Wrong, the shape to never produce:
+- No git bookkeeping. Never mention branch names, how many commits were made, commit hashes, whether commits were signed, or which files were touched by which commit. Nobody in a standup cares how the work is sliced in git, they care what changed and why. Say what the change does ("the forwarder now presents the client cert on https targets") and leave out where it lives in git. The one exception is state that affects the next step, stated as plain fact at the end of the bullet: "not pushed yet", "PR open, waiting on review", "yet to test on staging". Describing a change as going "in a separate branch" or "in a separate PR" is fine when the split itself matters, naming the branch is not.
+- Wrong, the shape to never produce (two problems here, the label-colon shape and the git bookkeeping, branch name plus commit count plus hash):
 
 ```
 - cross-cluster forwarding (opsmondo prod on kbm -> staging on kam): worked out what is actually needed. first thought there was an egress policy gap and wrote a cilium rule for it, dropped that once it was clear CNPs arent synced anywhere
@@ -73,7 +74,7 @@ Format rules:
 
 ```
 - worked out what cross-cluster forwarding (opsmondo prod on kbm to staging on kam) actually needs. first thought there was an egress policy gap and wrote a cilium rule for it, dropped that once it was clear CNPs arent synced anywhere. ends up only the puppet-CA client cert matters, kam's public traefik requires and verifies it, so no allow-list change needed.
-- put the forwarder changes on feat/forward-alerts-across-clusters as two signed commits, one presents the client cert on https forward targets, the other sends the forwarded copies in goroutines so prod answers alertmanager without waiting on staging. not pushed yet, PR not opened.
+- made the forwarder present the client cert on https forward targets, and send the forwarded copies in goroutines so prod answers alertmanager without waiting on staging. not pushed yet, PR not opened.
 - next is pushing both opsmondo branches and opening the forwarder PR, then after the release merge the kam staging branch and watch the first real forward
 ```
 - First person, past tense, terse. Write the way an engineer jots a quick note before a meeting, not the way an AI writes a report. That means: contractions are fine, sentence fragments are fine, "and" instead of semicolons, no throat-clearing phrases like "successfully implemented," "additionally," "this resulted in," "I was able to."
@@ -160,10 +161,12 @@ What these longer ones have in common, and what to reproduce:
 - Blockers and access problems get the same flat treatment as code ("didnt have access ... made PRs to get that").
 - Hyphens and commas join clauses. The only colons are in things like `product=kubeaid` or an error string, never a label in front of a bullet.
 - Open items are stated as plain fact at the end of a bullet ("yet to test on staging", "not pushed yet"), not as a separate "next steps" section.
+- Not one branch name, commit count or hash anywhere, even on days with a lot of commits. The work is described by what it does, not by how it was committed.
 - The typos are the user's own. Don't manufacture typos, but don't polish the grammar into something that reads edited either. Loose is correct.
 
 ## Step 5: edge cases
 
 - If there's genuinely nothing new since the last standup, say so in one short plain line (e.g. "nothing new since last standup") instead of padding out filler bullets.
+- Before returning, scan the bullets for anything that looks like a branch name (feat/..., fix/..., anything with a slash or hyphenated ticket prefix), a commit count ("two commits", "3 commits"), or a short hash. Rewrite those sentences around the change itself.
 - Never invent or embellish work that didn't happen. If something's ambiguous in the transcript, describe it plainly rather than guessing at impact or significance.
 - If the session covers multiple unrelated projects/topics, that's fine, just list them all as separate bullets in whatever order they happened.
